@@ -1,82 +1,89 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
 
-<div class="container">
-  <div class="row">
-    <div class="col-sm-12">
-      <h1>Sign up</h1>
-    </div>
-    <div class="col-sm-12">
-      <form class="form" name="form" ng-submit="register(form)" novalidate>
-
+<main >
+  <h1 class="logo">Camp<span class="logo-color">Vote</span>
+  </h1>
+  <form class="form" name="form" ng-submit="register(form)" novalidate>
+    <div class="login-card">
+      <div class="input-group">
         <div class="form-group" ng-class="{ 'has-success': form.name.$valid && submitted,
                                             'has-error': form.name.$invalid && submitted }">
-          <label>Name</label>
+          <label class="input-label ">
+            <p>User<span class="logo-color">name</span>:</p>
+          </label>
 
-          <input type="text" name="name" class="form-control" ng-model="user.name"
-                 required/>
-          <p class="help-block" ng-show="form.name.$error.required && submitted">
+          <input class="input-box" name="name" ng-model="user.name" placeholder="enter your username" required type="text"/>
+          <p class="login-error help-block" ng-show="form.name.$error.required && submitted">
             A name is required
           </p>
         </div>
+      </div>
 
+      <div class="input-group">
         <div class="form-group" ng-class="{ 'has-success': form.email.$valid && submitted,
                                             'has-error': form.email.$invalid && submitted }">
-          <label>Email</label>
+          <label class="input-label ">
+            <p>E m<span class="logo-color">a i l</span>:</p>
+          </label>
 
-          <input type="email" name="email" class="form-control" ng-model="user.email"
-                 required
-                 mongoose-error/>
-          <p class="help-block" ng-show="form.email.$error.email && submitted">
+          <input class="input-box" mongoose-error name="email" ng-model="user.email" placeholder="enter your email" required type="email"/>
+          <p class="login-error help-block" ng-show="form.email.$error.email && submitted">
             Doesn't look like a valid email.
           </p>
-          <p class="help-block" ng-show="form.email.$error.required && submitted">
+          <p class="login-error help-block" ng-show="form.email.$error.required && submitted">
             What's your email address?
           </p>
-          <p class="help-block" ng-show="form.email.$error.mongoose">
+          <p class="login-error help-block" ng-show="form.email.$error.mongoose">
             {{ errors.email }}
           </p>
         </div>
+      </div>
 
+      <div class="input-group">
         <div class="form-group" ng-class="{ 'has-success': form.password.$valid && submitted,
                                             'has-error': form.password.$invalid && submitted }">
-          <label>Password</label>
+          <label class="input-label">Pass<span class="logo-color">word</span>:</label>
 
-          <input type="password" name="password" class="form-control" ng-model="user.password"
-                 ng-minlength="3"
-                 required
-                 mongoose-error/>
-          <p class="help-block"
-             ng-show="(form.password.$error.minlength || form.password.$error.required) && submitted">
+          <input class="input-box" mongoose-error name="password" ng-minlength="3" ng-model="user.password" placeholder="enter your password" required type="password"/>
+
+          <p class="login-error help-block" ng-show="(form.password.$error.minlength || form.password.$error.required) && submitted">
             Password must be at least 3 characters.
           </p>
-          <p class="help-block" ng-show="form.password.$error.mongoose">
+          <p class="login-error help-block" ng-show="form.password.$error.mongoose">
             {{ errors.password }}
           </p>
-        </div>
 
-        <div>
-          <button class="btn btn-inverse btn-lg btn-login" type="submit">
-            Sign up
-          </button>
-          <a class="btn btn-default btn-lg btn-register" href="/login">
-            Login
-          </a>
         </div>
+      </div>
 
-        <hr>
-        <div>
-          <a class="btn btn-facebook" href="" ng-click="loginOauth('facebook')">
-            <i class="fa fa-facebook"></i> Connect with Facebook
-          </a>
-          <a class="btn btn-google-plus" href="" ng-click="loginOauth('google')">
-            <i class="fa fa-google-plus"></i> Connect with Google+
-          </a>
-          <a class="btn btn-twitter" href="" ng-click="loginOauth('twitter')">
-            <i class="fa fa-twitter"></i> Connect with Twitter
-          </a>
-        </div>
-      </form>
+      <div>
+        <button class="login-button" type="submit">
+          Sign up
+        </button>
+
+      </div>
+
+      <hr>
+      <div>
+        <a class="btn btn-facebook" href="" ng-click="loginOauth('facebook')">
+          <i class="fa fa-facebook"></i>
+          Connect with Facebook
+        </a>
+        <a class="btn btn-google-plus" href="" ng-click="loginOauth('google')">
+          <i class="fa fa-google-plus"></i>
+          Connect with Google+
+        </a>
+        <a class="btn btn-twitter" href="" ng-click="loginOauth('twitter')">
+          <i class="fa fa-twitter"></i>
+          Connect with Twitter
+        </a>
+
+        <a class="btn btn-github" href="" ng-click="loginOauth('github')">
+          <i class="fa fa-github"></i>
+        Connect with Github
+        </a>
+      </div>
     </div>
-  </div>
-  <hr>
-</div>
+  </form>
+<!-- <hr> -->
+</main>
