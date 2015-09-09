@@ -1,4 +1,5 @@
 @import url(https://fonts.googleapis.com/css?family=Questrial);
+
 // Colors
 // --------------------------------------------------
 $btnText: #fff;
@@ -36,7 +37,6 @@ $dark-gray: #6a6a6e;
 
 body {
   background-color: #fdfdfd;
-
 }
 
 main {
@@ -45,7 +45,7 @@ main {
   top             : 50%;
   background-color: #fff;
   z-index         : 100;
-  height          : 350px;
+  height          : auto;
   margin-top      : -200px;
   width           : 400px;
   margin-left     : -200px;
@@ -58,145 +58,142 @@ main {
     margin          : 0;
     line-height     : 75px;
     color           : $dark-gray;
-    font-family: 'Questrial', sans-serif;
+    font-family     : 'Questrial', sans-serif;
     letter-spacing  : 10px;
   }
 }
 
-.login-card{
-  padding:  30px 20px 10px;
+.login-card {
+  padding: 30px 20px 10px;
 }
 
 .input-group {
-    position: relative;
-    display: block;
-    height: 50px;
+  position: relative;
+  display : block;
+  height  : 50px;
 }
 
-.input-label{
-  font-family: 'Questrial', sans-serif;
-  color: $dark-gray;
-  font-weight: 300;
-  letter-spacing: .6px;
-  display: block;
-  text-shadow: 0 1px 2px #efefef;
-  padding-right: 10px;
-  font-size: 1pc;
-  margin-top: 25px;
-  margin-bottom: 10px;
-  float: left;
-  width: 110px;
-  line-height: 0;
-
+.input-label {
+  font-family   : 'Questrial', sans-serif;
+  color         : $dark-gray;
+  font-weight   : 300;
+  letter-spacing: 0.6px;
+  height: auto;
+  display       : block;
+  text-shadow   : 0 1px 2px #efefef;
+  padding-right : 10px;
+  font-size     : 1pc;
+  margin-top    : 25px;
+  margin-bottom : 10px;
+  float         : left;
+  width         : 110px;
+  line-height   : 0;
 }
 
-.input-box{
-  background: transparent;
-  border: none;
+.input-box {
+  background   : transparent;
+  border       : none;
   border-bottom: 1px solid #aeaeae;
-  outline: 0;
-  box-shadow: none;
-  color: $dark-gray;
-  font-weight: 400;
+  outline      : 0;
+  box-shadow   : none;
+  color        : $dark-gray;
+  font-weight  : 400;
   border-radius: 0;
-  width: 240px;
-  margin-top: 14px;
-  font-size: 1pc;
-  font-family: 'Questrial', sans-serif;
+  width        : 240px;
+  margin-top   : 14px;
+  font-size    : 1pc;
+  font-family  : 'Questrial', sans-serif;
 
-    &:focus{
-      font-family: 'Questrial', sans-serif;
-      color: $logo-color ;
-    }
-
+  &:focus {
+    font-family: 'Questrial', sans-serif;
+    color      : $logo-color;
+  }
 }
 
-.login-error{
-  color: $logo-color !important;
-  text-align: center;
+.login-error {
+  color      : $logo-color !important;
+  text-align : center;
   font-family: 'Questrial', sans-serif;
-  font-size: 1pc;
+  font-size  : 1pc;
 }
 
-.login-button{
-  background: none;
-  border: 1px solid $logo-color;
+.login-button {
+  background   : none;
+  border       : 1px solid $logo-color;
   border-radius: 20px;
-  text-align: center;
-  width: 350px;
-  height: 40px;
-  margin-left: 25px;
-  font-family: 'Questrial', sans-serif;
-  font-size: 16px;
-  color: $dark-gray;
+  text-align   : center;
+  width        : 350px;
+  height       : 40px;
+  margin       : 15px auto;
+  display      : block;
+  font-family  : 'Questrial', sans-serif;
+  font-size    : 16px;
+  color        : $dark-gray;
 
-  &:hover{
+  &:hover {
     background-color: $logo-color;
-    color: white;
+    color           : white;
   }
 
-  &:focus{
+  &:focus {
     outline: none;
   }
-
 }
 
-.button-login-group{
+.button-login-group {
   text-align: center;
   margin-top: 20px;
 }
 
-.btn-twitter{
-  background: none;
-  border: none;
-  color: #2DADDC;
+.btn-twitter {
+  background   : none;
+  border       : none;
+  color        : #2daddc;
   border-radius: 25px;
-  padding: 5px;
-  font-family: 'Questrial', sans-serif;
-
+  padding      : 5px;
+  font-family  : 'Questrial', sans-serif;
 }
 
-.btn-facebook{
-  background: none;
-  border: none;
-  color: #3B5998;
+.btn-facebook {
+  background   : none;
+  border       : none;
+  color        : #3b5998;
   border-radius: 25px;
-  padding: 5px;
-  font-family: 'Questrial', sans-serif;
-
+  padding      : 5px;
+  font-family  : 'Questrial', sans-serif;
 }
 
-.btn-google-plus{
-  background: none;
-  border: none;
-  color: #dd4b39;
+.btn-google-plus {
+  background   : none;
+  border       : none;
+  color        : #dd4b39;
   border-radius: 25px;
-  padding: 5px;
-  font-family: 'Questrial', sans-serif;
+  padding      : 5px;
+  font-family  : 'Questrial', sans-serif;
 }
 
-.forgot{
-  float: left;
-  font-family: 'Questrial', sans-serif;
-  padding: 5px 40px;
-  margin-top: 20px;
-  color: #f76e64;
+.forgot {
+  float        : left;
+  font-family  : 'Questrial', sans-serif;
+  padding      : 5px 20px;
+  margin-top   : 20px;
+  margin-bottom: 10px;
+  color        : #f76e64;
 
-  &:hover{
+  &:hover {
     color: #f76e64;
   }
-
 }
 
-.register{
-  float: right;
-  font-family: 'Questrial', sans-serif;
-  padding: 5px 40px;
-  margin-top: 20px;
-  color: #f76e64;
+.register {
+  float        : right;
+  font-family  : 'Questrial', sans-serif;
+  padding      : 5px 20px;
+  margin-top   : 20px;
+  margin-bottom: 10px;
+  color        : #f76e64;
 
-  &:hover{
+  &:hover {
     color: #f76e64;
   }
-
 }
