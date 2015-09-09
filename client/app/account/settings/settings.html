@@ -1,7 +1,7 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
 
 <main>
-  <h1 class="logo">Camp<span class="logo-color">Vote</span>
+  <h1 class="logo"><span class="logo-color-grade">Settings</span>
   </h1>
 
   <form class="form" name="form" ng-submit="changePassword(form)" novalidate>
@@ -11,8 +11,8 @@
         <label class="input-label">
           Old<span class="logo-color">pass</span>:</label>
 
-        <input class="input-box" mongoose-error name="password" ng-model="user.oldPassword" type="password"/>
-        <p class="help-block" ng-show="form.password.$error.mongoose">
+        <input class="input-box" mongoose-error name="password" ng-model="user.oldPassword" type="password" placeholder="enter your CURRENT password"/>
+        <p class="login-error help-block" ng-show="form.password.$error.mongoose">
           {{ errors.other }}
         </p>
       </div>
@@ -21,14 +21,14 @@
         <label class="input-label">
           New<span class="logo-color">Pass</span>:</label>
 
-        <input class="input-box" name="newPassword" ng-minlength="3" ng-model="user.newPassword" required type="password"/>
-        <p class="help-block" ng-show="(form.newPassword.$error.minlength || form.newPassword.$error.required) && (form.newPassword.$dirty || submitted)">
+        <input class="input-box" name="newPassword" ng-minlength="3" ng-model="user.newPassword" required type="password" placeholder="enter your NEW password"/>
+        <p class="login-error help-block" ng-show="(form.newPassword.$error.minlength || form.newPassword.$error.required) && (form.newPassword.$dirty || submitted)">
           Password must be at least 3 characters.
         </p>
       </div>
     </div>
 
-    <p class="help-block">
+    <p class="login-error login-error help-block">
       {{ message }}
     </p>
 
