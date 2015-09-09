@@ -7,36 +7,38 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="/">Camp Vote</a>
+      <a class="navbar-brand-me" href="/">Camp<span class="logo-color">Vote</span></a>
     </div>
     <div class="navbar-collapse collapse" collapse="isCollapsed" id="navbar-main">
       <ul class="nav navbar-nav">
-        <li ng-class="{active: isActive(item.link)}" ng-repeat="item in menu">
+        <!-- <li ng-class="{active: isActive(item.link)}" ng-repeat="item in menu">
           <a ng-href="{{item.link}}">{{item.title}}</a>
-        </li>
-        <li ng-class="{active: isActive('/admin')}" ng-show="isAdmin()">
+        </li> -->
+        <li ng-show="isAdmin()">
           <a href="/admin">Admin</a>
         </li>
       </ul>
 
       <ul class="nav navbar-nav navbar-right">
-        <li ng-class="{active: isActive('/signup')}" ng-hide="isLoggedIn()">
-          <a href="/signup">Sign up</a>
+
+        <li  ng-hide="isLoggedIn()">
+          <a href="/signup"><button class="menu-button" type="button" name="button">Register</button></a>
         </li>
-        <li ng-class="{active: isActive('/login')}" ng-hide="isLoggedIn()">
-          <a href="/login">Login</a>
+
+        <li ng-hide="isLoggedIn()">
+            <a href="/login"><button class="menu-button" type="button" name="button">Login</button></a>
         </li>
         <li ng-show="isLoggedIn()">
-          <p class="navbar-text">Hello
-            {{ getCurrentUser().name }}</p>
+          <p class="navbar-text">Hello,
+            {{ getCurrentUser().name }}!</p>
         </li>
-        <li ng-class="{active: isActive('/settings')}" ng-show="isLoggedIn()">
+        <li  ng-show="isLoggedIn()">
           <a href="/settings">
-            <span class="glyphicon glyphicon-cog"></span>
+            <button class="menu-button" type="button" name="button">Settings</button>
           </a>
         </li>
-        <li ng-class="{active: isActive('/logout')}" ng-show="isLoggedIn()">
-          <a href="" ng-click="logout()">Logout</a>
+        <li  ng-show="isLoggedIn()">
+          <a href="" ng-click="logout()"><button class="menu-button" type="button" name="button">Logout</button></a>
         </li>
       </ul>
     </div>
