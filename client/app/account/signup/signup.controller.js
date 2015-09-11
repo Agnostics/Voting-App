@@ -2,13 +2,21 @@
 
 angular.module('votingAppApp')
 	.controller('SignupCtrl', function ($scope, Auth, $location, $window) {
+
 		$scope.user = {};
 		$scope.errors = {};
 
 		$scope.register = function (form) {
 			$scope.submitted = true;
 
-			console.log('hello');
+			if($scope.user.name !== undefined) {
+				if($scope.user.name.search(/\s/g) !== -1 || $scope.user.name.search(/@/g) !== -1) {
+					$scope.errors = {};
+					form.name.$setValidity('mongoose', false);
+					$scope.errors.name = 'Space or @ is not permitted within username.';
+					$('#name').focus();
+				}
+			}
 
 			if(form.$valid) {
 				Auth.createUser({
@@ -18,7 +26,6 @@ angular.module('votingAppApp')
 					})
 					.then(function () {
 						// Account created, redirect to home
-						console.log('doen');
 						$location.path('/');
 					})
 					.catch(function (err) {

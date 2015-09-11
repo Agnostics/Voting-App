@@ -1,7 +1,8 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
 
 <main>
-  <h1 class="logo"><span class="logo-color-grade">Log In</span>
+  <h1 class="logo">
+    <span class="logo-color-grade">Log In</span>
   </h1>
 
   <form class="form" name="form" ng-submit="login(form)" novalidate>
@@ -9,12 +10,14 @@
     <div class="login-card">
       <div class="input-group">
         <label class="input-label">
-          E m<span class="logo-color">a i l</span>:</label>
-        <input class="input-box" name="email" ng-model="user.email" placeholder="enter your email " required type="email">
+          User
+          <span class="logo-color">name</span>:</label>
+        <input class="input-box" ng-model="user.name" placeholder="enter your username " required >
       </div>
 
       <div class="input-group">
-        <label class="input-label">Pass<span class="logo-color">word</span>:</label>
+        <label class="input-label">Pass
+          <span class="logo-color">word</span>:</label>
         <input class="input-box" name="password" ng-model="user.password" placeholder="enter your password" required type="password">
       </div>
     </div>
@@ -33,6 +36,27 @@
     <div>
       <button class="login-button" type="submit">Login</button>
 
+    </div>
+
+    <hr>
+    <div class="connect-with">
+      <a class="btn btn-facebook" href="" ng-click="loginOauth('facebook')">
+        <i class="fa fa-facebook"></i>
+        Login with Facebook
+      </a>
+      <a class="btn btn-google-plus" href="" ng-click="loginOauth('google')">
+        <i class="fa fa-google-plus"></i>
+        Login with Google+
+      </a>
+      <a class="btn btn-twitter" href="" ng-click="loginOauth('twitter')">
+        <i class="fa fa-twitter"></i>
+        Login with Twitter
+      </a>
+
+      <a class="btn btn-github" href="" ng-click="loginOauth('github')">
+        <i class="fa fa-github"></i>
+        Login with Github
+      </a>
     </div>
 
     <a class="forgot" href="">Forgot Password?</a>

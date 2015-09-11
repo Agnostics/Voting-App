@@ -2,37 +2,45 @@
 
 <header class="hero-unit" id="banner">
   <div class="container">
-    <h1>'Allo, 'Allo!</h1>
-    <p class="lead">Kick-start your next web app with Angular Fullstack</p>
-    <img src="assets/images/yeoman.png" alt="I'm Yeoman">
-  </div>
-</header>
+    <div ng-hide="showPoll">
+      <h1>Create a Poll</h1>
 
-<div class="container">
-  <div class="row">
-    <div class="col-lg-12">
-      <h1 class="page-header">Features:</h1>
-      <ul class="nav nav-tabs nav-stacked col-md-4 col-lg-4 col-sm-6" ng-repeat="thing in awesomeThings">
-        <li><a href="#" tooltip="{{thing.info}}">{{thing.name}}<button type="button" class="close" ng-click="deleteThing(thing)">&times;</button></a></li>
-      </ul>
+      <p class="lead">Create a quick and resposive poll to easily share!</p>
+      <button class="site-button" ng-click="showPoll = true" type="submit">Make one now!</button>
     </div>
+
+    <div ng-show="showPollDone">
+      <h1>This is your poll!</h1>
+
+    </div>
+    <input class="main-input-box" ng-model="pollQuestion" ng-show="showPoll && !finishPoll" placeholder="Question Here" required>
   </div>
 
-  <form class="thing-form">
-    <label>Syncs in realtime across clients</label>
-    <p class="input-group">
-      <input type="text" class="form-control" placeholder="Add a new thing here." ng-model="newThing">
-      <span class="input-group-btn">
-        <button type="submit" class="btn btn-primary" ng-click="addThing()">Add New</button>
-      </span>
-    </p>
-  </form>
-</div>
+</header>
+<form>
+
+  <div class="options-contain sample-show-hide" ng-show="showPoll && !finishPoll">
+
+    <div class="option-choice" ng-repeat="pollOption in pollOptions track by $index">
+      <input class="option-input-box ease-in" ng-model="pollOption.name" placeholder="Enter Option">
+      <img class="close-btn ease-in" ng-click="removeOption($index)" src="assets/images/delete30.png"/>
+    </div>
+
+    <button class="option-button" ng-click="addOption()">New Option</button>
+    <button class="option-button" ng-click="addPoll()" type="submit">Create Poll</button>
+
+  </div>
+
+</form>
 
 <footer class="footer">
   <div class="container">
-      <p>Angular Fullstack v2.1.1 |
-        <a href="https://twitter.com/tyhenkel">@tyhenkel</a> |
-         <a href="https://github.com/DaftMonk/generator-angular-fullstack/issues?state=open">Issues</a></p>
+    <p>
+      <a href="http://www.freecodecamp.com/">FreeCodeCamp</a>
+      |
+      <a href="https://twitter.com/_BrandonPadilla">@BrandonPadilla</a>
+      |
+      <a href="https://github.com/Agnostics/Voting-App">@Github</a>
+    </p>
   </div>
 </footer>

@@ -10,6 +10,9 @@ angular.module('votingAppApp', [
 ])
   .config(function ($routeProvider, $locationProvider, $httpProvider) {
     $routeProvider
+    .when('/polls', {
+      redirectTo: '/polls'
+    })
       .otherwise({
         redirectTo: '/'
       });

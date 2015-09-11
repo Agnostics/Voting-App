@@ -1,21 +1,21 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
 
 <main >
-  <h1 class="logo"><span class="logo-color-grade">Register</span>
+  <h1 class="logo">
+    <span class="logo-color-grade">Register</span>
   </h1>
   <form class="form" name="form" ng-submit="register(form)" novalidate>
     <div class="login-card">
       <div class="input-group">
-        <div class="form-group" ng-class="{ 'has-success': form.name.$valid && submitted,
-                                            'has-error': form.name.$invalid && submitted }">
+        <div class="form-group" ng-class="{ 'has-success': form.name.$valid && submitted, 'has-error': form.name.$invalid && submitted }">
           <label class="input-label ">
-            <p>User<span class="logo-color">name</span>:</p>
+            <p>User
+              <span class="logo-color">name</span>:</p>
           </label>
 
-          <input class="input-box" name="name" ng-model="user.name" placeholder="enter your username" required type="text"/>
-          <p class="login-error help-block" ng-show="form.name.$error.required && submitted">
-            A name is required
-          </p>
+          <input class="input-box" mongoose-error name="name" ng-model="user.name" placeholder="enter your username" required type="text"/>
+          <p class="login-error help-block" ng-show="form.name.$error.required && submitted">Username is required.</p>
+          <p class="login-error help-block" ng-show="form.name.$error.mongoose">{{ errors.name }}</p>
         </div>
       </div>
 
@@ -23,10 +23,11 @@
         <div class="form-group" ng-class="{ 'has-success': form.email.$valid && submitted,
                                             'has-error': form.email.$invalid && submitted }">
           <label class="input-label ">
-            <p>E m<span class="logo-color">a i l</span>:</p>
+            <p>E m
+              <span class="logo-color">a i l</span>:</p>
           </label>
 
-          <input class="input-box" mongoose-error name="email" ng-model="user.email" placeholder="enter your email" required type="email"/>
+          <input class="input-box" mongoose-error name="email" ng-model="user.email" placeholder="enter your email"/>
           <p class="login-error help-block" ng-show="form.email.$error.email && submitted">
             Doesn't look like a valid email.
           </p>
@@ -42,7 +43,8 @@
       <div class="input-group">
         <div class="form-group" ng-class="{ 'has-success': form.password.$valid && submitted,
                                             'has-error': form.password.$invalid && submitted }">
-          <label class="input-label">Pass<span class="logo-color">word</span>:</label>
+          <label class="input-label">Pass
+            <span class="logo-color">word</span>:</label>
 
           <input class="input-box" mongoose-error name="password" ng-minlength="3" ng-model="user.password" placeholder="enter your password" required type="password"/>
 
@@ -62,9 +64,9 @@
         </button>
 
       </div>
-
       <hr>
-      <div>
+
+      <div class="connect-with">
         <a class="btn btn-facebook" href="" ng-click="loginOauth('facebook')">
           <i class="fa fa-facebook"></i>
           Connect with Facebook
@@ -80,7 +82,7 @@
 
         <a class="btn btn-github" href="" ng-click="loginOauth('github')">
           <i class="fa fa-github"></i>
-        Connect with Github
+          Connect with Github
         </a>
       </div>
     </div>

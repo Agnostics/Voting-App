@@ -17,6 +17,10 @@ angular.module('votingAppApp')
       $location.path('/login');
     };
 
+    $scope.go = function ( path ) {
+      $location.path( path );
+    };
+
     $scope.isActive = function(route) {
       return route === $location.path();
     };

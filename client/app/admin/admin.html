@@ -4,9 +4,28 @@
   <p>The delete user and user index api routes are restricted to users with the 'admin' role.</p>
   <ul class="list-group">
     <li class="list-group-item" ng-repeat="user in users">
-        <strong>{{user.name}}</strong><br>
-        <span class="text-muted">{{user.email}}</span>
-        <a ng-click="delete(user)" class="trash"><span class="glyphicon glyphicon-trash pull-right"></span></a>
+      <strong>{{user.name}}</strong><br>
+      <span class="text-muted">{{user.email}}</span>
+      <a class="trash" ng-click="delete(user)">
+        <span class="glyphicon glyphicon-trash pull-right"></span>
+      </a>
     </li>
   </ul>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-12">
+        <h1 class="page-header">Polls:</h1>
+        <ul class="nav nav-tabs nav-stacked col-md-4 col-lg-4 col-sm-6" ng-repeat="poll in allPolls">
+          <li>
+            <a href="#" tooltip="{{poll.info}}">{{poll.pollTitle}}
+              <button class="close" ng-click="deletePoll(poll)" type="button">&times;</button>
+            </a>
+          </li>
+        </ul>
+      </div>
+    </div>
+
+  </div>
+
 </div>

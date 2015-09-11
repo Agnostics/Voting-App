@@ -1,52 +1,74 @@
-.thing-form {
-    margin: 20px 0;
-}
-
 #banner {
-    border-bottom: none;
-    margin-top: -20px;
+  border-bottom: none;
+  margin-top   : -20px;
 }
 
 #banner h1 {
-    font-size: 60px;
-    line-height: 1;
-    letter-spacing: -1px;
+  font-size     : 60px;
+  line-height   : 1;
+  letter-spacing: 5px;
+  font-family   : 'Questrial', sans-serif;
+}
+
+.poll-title {
+  font-size     : 30px;
+  line-height   : 1;
+  letter-spacing: 5px;
+  font-family   : 'Questrial', sans-serif;
 }
 
 .hero-unit {
-    position: relative;
-    padding: 30px 15px;
-    color: #F5F5F5;
-    text-align: center;
-    text-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
-    background: #4393B9;
+  position   : relative;
+  padding    : 30px 15px;
+  color      : #f5f5f5;
+  text-align : center;
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+  background : $logo-color;
+  font-family: 'Questrial', sans-serif;
 }
 
 .footer {
-    text-align: center;
-    padding: 30px 0;
-    margin-top: 70px;
-    border-top: 1px solid #E5E5E5;
+  text-align     : center;
+  padding        : 30px 0;
+  margin-top     : 70px;
+  border-top     : 1px solid #e5e5e5;
+  font-family    : 'Questrial', sans-serif;
+  color          : $dark-gray;
+  text-decoration: none;
+  letter-spacing : 2px;
+  
+  &:hover {
+    color: $logo-color;
+  }
+  
+  a {
+    text-decoration: none;
+    color          : $dark-gray;
+    
+    &:hover {
+      color: $logo-color;
+    }
+  }
 }
 
 .navbar-text {
   margin-left: 15px;
-  margin-top: 34px;
+  margin-top : 25px;
   font-family: 'Questrial', sans-serif;
-  font-size: 18px;
+  font-size  : 18px;
 }
 
-.navbar-brand-me{
-  color: $dark-gray;
-  display: inline-block;
-  margin-top: 22px;
-  font-family: 'Questrial', sans-serif;
-  font-size: 32px;
+.navbar-brand-me {
+  color         : $dark-gray;
+  display       : inline-block;
+  margin-top    : 12px;
+  font-family   : 'Questrial', sans-serif;
+  font-size     : 32px;
   letter-spacing: 7px;
-
-  &:hover{
+  
+  &:hover {
     text-decoration: none;
-    color: $dark-gray;
+    color          : $dark-gray;
   }
 }
 
@@ -57,38 +79,228 @@
   text-align   : center;
   width        : 100px;
   height       : 30px;
-  margin       : 15px auto;
+  margin       : 22px 10px;
   display      : block;
   font-family  : 'Questrial', sans-serif;
   font-size    : 16px;
   color        : $dark-gray;
   outline      : none;
-
-
-  a{
+  
+  a {
     text-decoration: none;
-    color: $dark-gray;
-    font-family  : 'Questrial', sans-serif;
-    outline      : none;
-
-
+    color          : $dark-gray;
+    font-family    : 'Questrial', sans-serif;
+    outline        : none;
   }
-
+  
   &:hover {
     background-color: $logo-color;
-    color: white;
-    outline: none;
-
-    &:active{
+    color           : white;
+    outline         : none;
+    
+    &:active {
       outline: none;
     }
-
-    a{
+    
+    a {
       color: white;
     }
   }
+}
 
+.main-input-box::-webkit-input-placeholder {
+  color         : white;
+  text-align    : center;
+  font-size     : 30px;
+  letter-spacing: 10px;
+}
 
+.main-input-box:-moz-placeholder {
+  /* Firefox 18- */
+  color         : white;
+  text-align    : center;
+  font-size     : 30px;
+  letter-spacing: 10px;
+}
 
+.main-input-box::-moz-placeholder {
+  /* Firefox 19+ */
+  color         : white;
+  text-align    : center;
+  font-size     : 30px;
+  letter-spacing: 10px;
+}
 
+.main-input-box:-ms-input-placeholder {
+  color         : white;
+  text-align    : center;
+  font-size     : 30px;
+  letter-spacing: 10px;
+}
+
+//
+.option-input-box::-webkit-input-placeholder {
+  color         : $dark-gray;
+  text-align    : center;
+  font-size     : 24px;
+  letter-spacing: 10px;
+}
+
+.option-input-box:-moz-placeholder {
+  /* Firefox 18- */
+  color         : $dark-gray;
+  text-align    : center;
+  font-size     : 24px;
+  letter-spacing: 10px;
+}
+
+.option-input-box::-moz-placeholder {
+  /* Firefox 19+ */
+  color         : $dark-gray;
+  text-align    : center;
+  font-size     : 24px;
+  letter-spacing: 10px;
+}
+
+.option-input-box:-ms-input-placeholder {
+  color         : $dark-gray;
+  text-align    : center;
+  font-size     : 24px;
+  letter-spacing: 10px;
+}
+
+.main-input-box {
+  background    : transparent;
+  border        : none;
+  border-bottom : 2px solid white;
+  outline       : 0;
+  box-shadow    : none;
+  color         : $dark-gray;
+  font-weight   : 400;
+  border-radius : 0;
+  width         : 100%;
+  margin-top    : 14px;
+  font-size     : 30px;
+  font-family   : 'Questrial', sans-serif;
+  text-align    : center;
+  letter-spacing: 5px;
+  
+  &:focus {
+    font-family: 'Questrial', sans-serif;
+    color      : white;
+  }
+}
+
+.options-contain {
+  margin-top : 10px;
+  position   : relative;
+  padding    : 30px 15px;
+  color      : #f5f5f5;
+  text-align : center;
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
+  /* background: #f76e64; */
+}
+
+.option-input-box {
+  background    : transparent;
+  border        : none;
+  border-bottom : 2px solid #f76e64;
+  outline       : 0;
+  box-shadow    : none;
+  color         : #6a6a6e;
+  font-weight   : 400;
+  border-radius : 0;
+  width         : 300px;
+  margin        : 0 auto;
+  font-size     : 24px;
+  font-family   : 'Questrial', sans-serif;
+  text-align    : center;
+  letter-spacing: 5px;
+  display       : inline-block;
+  
+  &:focus {
+    font-family: 'Questrial', sans-serif;
+    color      : $logo-color;
+  }
+}
+
+.ease-in {
+  -webkit-animation: fade-in 1s ease-in;
+  -moz-animation   : fade-in 1s ease-in;
+  -o-animation     : fade-in 1s ease-in;
+  animation        : fade-in 1s ease-in;
+}
+
+@-webkit-keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@-moz-keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@-o-keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes fade-in {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.option-choice {
+  padding: 20px 0;
+}
+
+.box-color {
+  height       : 35px;
+  width        : 35px;
+  background   : rgb(random(255), random(255), random(255));
+  margin       : -14px 10px;
+  display      : inline-block;
+  border-radius: 10px;
+}
+
+.close-btn {
+  padding-left: 15px;
+}
+
+.option-button {
+  background   : none;
+  border       : 2px solid #f76e64;
+  border-radius: 20px;
+  text-align   : center;
+  width        : 150px;
+  height       : 30px;
+  margin       : 22px 10px;
+  display      : inline-block;
+  font-family  : 'Questrial', sans-serif;
+  font-size    : 16px;
+  color        : #6a6a6e;
+  outline      : none;
+  
+  &:hover {
+    background-color: $logo-color;
+    color           : white;
+  }
+  
+  &:focus {
+    outline: none;
+  }
 }

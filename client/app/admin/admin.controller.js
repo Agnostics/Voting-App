@@ -1,10 +1,17 @@
 'use strict';
 
 angular.module('votingAppApp')
-  .controller('AdminCtrl', function ($scope, $http, Auth, User) {
+  .controller('AdminCtrl', function ($scope, $http, Auth, User, socket) {
 
     // Use the User $resource to fetch all users
     $scope.users = User.query();
+    $scope.allPolls = [];
+
+
+    $http.get('/api/polls').success(function(polls) {
+      $scope.allPolls = polls;
+      socket.syncUpdates('poll', $scope.allPolls);
+    });
 
     $scope.delete = function(user) {
       User.remove({ id: user._id });
@@ -14,4 +21,10 @@ angular.module('votingAppApp')
         }
       });
     };
+
+    $scope.deletePoll = function(poll) {
+      $http.delete('/api/polls/' + poll._id);
+
+    };
+
   });

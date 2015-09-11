@@ -1,146 +1,151 @@
 'use strict';
 
 angular.module('votingAppApp')
-  .factory('Auth', function Auth($location, $rootScope, $http, User, $cookieStore, $q) {
-    var currentUser = {};
-    if($cookieStore.get('token')) {
-      currentUser = User.get();
-    }
+	.factory('Auth', function Auth($location, $rootScope, $http, User, $cookieStore, $q) {
+		var currentUser = {};
+		if($cookieStore.get('token')) {
+			currentUser = User.get();
+		}
 
-    return {
+		return {
 
-      /**
-       * Authenticate user and save token
-       *
-       * @param  {Object}   user     - login info
-       * @param  {Function} callback - optional
-       * @return {Promise}
-       */
-      login: function(user, callback) {
-        var cb = callback || angular.noop;
-        var deferred = $q.defer();
+			/**
+			 * Authenticate user and save token
+			 *
+			 * @param  {Object}   user     - login info
+			 * @param  {Function} callback - optional
+			 * @return {Promise}
+			 */
+			login: function (user, callback) {
 
-        $http.post('/auth/local', {
-          email: user.email,
-          password: user.password
-        }).
-        success(function(data) {
-          $cookieStore.put('token', data.token);
-          currentUser = User.get();
-          deferred.resolve(data);
-          return cb();
-        }).
-        error(function(err) {
-          this.logout();
-          deferred.reject(err);
-          return cb(err);
-        }.bind(this));
+				var cb = callback || angular.noop;
+				var deferred = $q.defer();
 
-        return deferred.promise;
-      },
+				$http.post('/auth/local', {
+					name: user.name,
+					password: user.password
+				}).
+				success(function (data) {
+					$cookieStore.put('token', data.token);
+					currentUser = User.get();
+					deferred.resolve(data);
+					return cb();
+				}).
+				error(function (err) {
+					this.logout();
+					deferred.reject(err);
+					return cb(err);
+				}.bind(this));
 
-      /**
-       * Delete access token and user info
-       *
-       * @param  {Function}
-       */
-      logout: function() {
-        $cookieStore.remove('token');
-        currentUser = {};
-      },
+				return deferred.promise;
+			},
 
-      /**
-       * Create a new user
-       *
-       * @param  {Object}   user     - user info
-       * @param  {Function} callback - optional
-       * @return {Promise}
-       */
-      createUser: function(user, callback) {
-        var cb = callback || angular.noop;
+			/**
+			 * Delete access token and user info
+			 *
+			 * @param  {Function}
+			 */
+			logout: function () {
+				$cookieStore.remove('token');
+				currentUser = {};
+			},
 
-        return User.save(user,
-          function(data) {
-            $cookieStore.put('token', data.token);
-            currentUser = User.get();
-            return cb(user);
-          },
-          function(err) {
-            this.logout();
-            return cb(err);
-          }.bind(this)).$promise;
-      },
+			/**
+			 * Create a new user
+			 *
+			 * @param  {Object}   user     - user info
+			 * @param  {Function} callback - optional
+			 * @return {Promise}
+			 */
+			createUser: function (user, callback) {
+				console.log(user);
 
-      /**
-       * Change password
-       *
-       * @param  {String}   oldPassword
-       * @param  {String}   newPassword
-       * @param  {Function} callback    - optional
-       * @return {Promise}
-       */
-      changePassword: function(oldPassword, newPassword, callback) {
-        var cb = callback || angular.noop;
+				var cb = callback || angular.noop;
 
-        return User.changePassword({ id: currentUser._id }, {
-          oldPassword: oldPassword,
-          newPassword: newPassword
-        }, function(user) {
-          return cb(user);
-        }, function(err) {
-          return cb(err);
-        }).$promise;
-      },
+				return User.save(user,
+					function (data) {
+						$cookieStore.put('token', data.token);
+						currentUser = User.get();
+						return cb(user);
+					},
+					function (err) {
+						this.logout();
+						return cb(err);
+					}.bind(this)).$promise;
+			},
 
-      /**
-       * Gets all available info on authenticated user
-       *
-       * @return {Object} user
-       */
-      getCurrentUser: function() {
-        return currentUser;
-      },
+			/**
+			 * Change password
+			 *
+			 * @param  {String}   oldPassword
+			 * @param  {String}   newPassword
+			 * @param  {Function} callback    - optional
+			 * @return {Promise}
+			 */
+			changePassword: function (oldPassword, newPassword, callback) {
+				var cb = callback || angular.noop;
 
-      /**
-       * Check if a user is logged in
-       *
-       * @return {Boolean}
-       */
-      isLoggedIn: function() {
-        return currentUser.hasOwnProperty('role');
-      },
+				return User.changePassword({
+					id: currentUser._id
+				}, {
+					oldPassword: oldPassword,
+					newPassword: newPassword
+				}, function (user) {
+					return cb(user);
+				}, function (err) {
+					return cb(err);
+				}).$promise;
+			},
 
-      /**
-       * Waits for currentUser to resolve before checking if user is logged in
-       */
-      isLoggedInAsync: function(cb) {
-        if(currentUser.hasOwnProperty('$promise')) {
-          currentUser.$promise.then(function() {
-            cb(true);
-          }).catch(function() {
-            cb(false);
-          });
-        } else if(currentUser.hasOwnProperty('role')) {
-          cb(true);
-        } else {
-          cb(false);
-        }
-      },
+			/**
+			 * Gets all available info on authenticated user
+			 *
+			 * @return {Object} user
+			 */
+			getCurrentUser: function () {
+				return currentUser;
+			},
 
-      /**
-       * Check if a user is an admin
-       *
-       * @return {Boolean}
-       */
-      isAdmin: function() {
-        return currentUser.role === 'admin';
-      },
+			/**
+			 * Check if a user is logged in
+			 *
+			 * @return {Boolean}
+			 */
+			isLoggedIn: function () {
+				return currentUser.hasOwnProperty('role');
+			},
 
-      /**
-       * Get auth token
-       */
-      getToken: function() {
-        return $cookieStore.get('token');
-      }
-    };
-  });
+			/**
+			 * Waits for currentUser to resolve before checking if user is logged in
+			 */
+			isLoggedInAsync: function (cb) {
+				if(currentUser.hasOwnProperty('$promise')) {
+					currentUser.$promise.then(function () {
+						cb(true);
+					}).catch(function () {
+						cb(false);
+					});
+				} else if(currentUser.hasOwnProperty('role')) {
+					cb(true);
+				} else {
+					cb(false);
+				}
+			},
+
+			/**
+			 * Check if a user is an admin
+			 *
+			 * @return {Boolean}
+			 */
+			isAdmin: function () {
+				return currentUser.role === 'admin';
+			},
+
+			/**
+			 * Get auth token
+			 */
+			getToken: function () {
+				return $cookieStore.get('token');
+			}
+		};
+	});
