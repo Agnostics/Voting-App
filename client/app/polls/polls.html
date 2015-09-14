@@ -1,0 +1,48 @@
+<div ng-include="'components/navbar/navbar.html'"></div>
+
+<header class="hero-unit" id="banner">
+  <div class="container">
+    <div>
+      <h1 class="home-title" ng-show="showAll">{{pageOwner}}
+        polls</h1>
+      <h1 class="poll-title" ng-hide="showAll">{{userPoll[0].pollTitle}}</h1>
+      <p class="lead" ng-show="showAll">Here are the polls
+        {{currentPage}}
+        created!</p>
+    </div>
+  </div>
+
+</header>
+
+<div class="container" ng-show="showAll">
+  <div class="row">
+    <div class="col-xs-12 col-md-4" ng-repeat="poll in allPolls">
+
+      <div class="login-button line-fix" ng-click="link(poll.url)">
+        {{poll.pollTitle}}
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<div class="container" ng-hide="showAll" ng-repeat="option in userPoll[0].data">
+
+  <div class="poll-choice" ng-click="vote(option.name)">
+    {{option.name}}
+    {{option.value}}
+  </div>
+
+</div>
+
+<footer class="footer">
+  <div class="container">
+    <p>
+      <a href="http://www.freecodecamp.com/">FreeCodeCamp</a>
+      |
+      <a href="https://twitter.com/_BrandonPadilla">@BrandonPadilla</a>
+      |
+      <a href="https://github.com/Agnostics/Voting-App">@Github</a>
+    </p>
+  </div>
+</footer>

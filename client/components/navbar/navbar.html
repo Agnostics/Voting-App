@@ -7,39 +7,39 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand-me" href="/">Camp<span class="logo-color">Vote</span></a>
+      <a class="navbar-brand-me" ng-click="reloadRoute()" ng-href="/">Camp
+        <span class="logo-color-header">Vote</span>
+      </a>
     </div>
     <div class="navbar-collapse collapse" collapse="isCollapsed" id="navbar-main">
-      <ul class="nav navbar-nav">
-        <!-- <li ng-class="{active: isActive(item.link)}" ng-repeat="item in menu">
-          <a ng-href="{{item.link}}">{{item.title}}</a>
-        </li> -->
-        <li ng-show="isAdmin()">
-          <a href="/admin">Admin</a>
-        </li>
-      </ul>
+      <ul class="nav navbar-nav"></ul>
 
       <ul class="nav navbar-nav navbar-right">
 
-        <li  ng-hide="isLoggedIn()">
-          <a href="/signup"><button class="menu-button" type="button" name="button">Register</button></a>
+        <li ng-hide="isLoggedIn()">
+          <button class="menu-button" name="button" ng-click="go('/signup')" type="button">Register</button>
         </li>
 
         <li ng-hide="isLoggedIn()">
-            <a href="/login"><button class="menu-button" type="button" name="button">Login</button></a>
+          <button class="menu-button" name="button" ng-click="go('/login')" type="button">Login</button>
         </li>
         <li ng-show="isLoggedIn()">
           <p class="navbar-text">Hello,
             {{ getCurrentUser().name }}!</p>
         </li>
-        <li  ng-show="isLoggedIn()">
-          <a href="/settings">
-            <button class="menu-button" type="button" name="button">Settings</button>
-          </a>
+
+        <li ng-show="isAdmin()">
+          <button class="menu-button" name="button" ng-click="go('/admin-panel')" type="button">Admin</button>
         </li>
-        <li  ng-show="isLoggedIn()">
-          <a href="" ng-click="logout()"><button class="menu-button" type="button" name="button">Logout</button></a>
+        <li ng-show="isLoggedIn()">
+
+          <button class="menu-button" name="button" ng-click="go('/settings')" type="button">Settings</button>
+
         </li>
+        <li ng-show="isLoggedIn()">
+          <button class="menu-button" name="button" ng-click="logout()" type="button">Logout</button>
+        </li>
+
       </ul>
     </div>
   </div>

@@ -31,8 +31,33 @@ $dark-gray: #6a6a6e;
   @include button-variant($btnTextAlt, $btnGithubBackground, $btnGithubBackgroundHighlight);
 }
 
-.logo-color {
+.gradient-color {
+  background: #f44b3f;
+  background: -moz-linear-gradient(top, #f44b3f 0%, #f76e64 48%, #f2cbc9 100%);
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f44b3f), color-stop(48%,#f76e64), color-stop(100%,#f2cbc9));
+  background: -webkit-linear-gradient(top, #f44b3f 0%,#f76e64 48%,#f2cbc9 100%);
+  background: -o-linear-gradient(top, #f44b3f 0%,#f76e64 48%,#f2cbc9 100%);
+  background: -ms-linear-gradient(top, #f44b3f 0%,#f76e64 48%,#f2cbc9 100%);
+  background: linear-gradient(to bottom, #f44b3f 0%,#f76e64 48%,#f2cbc9 100%);
+  filter:progid:DXImageTransform.Microsoft.gradient( startColorstr='#f44b3f', endColorstr='#f2cbc9',GradientType=0 );
+}
+
+.logo-color-grade {
+  
+  // @extend  .gradient-color;
+  // -webkit-background-clip: text;
+  // -webkit-text-fill-color: transparent;
   color: $logo-color;
+}
+
+.logo-color {
+  color      : $logo-color;
+  margin-left: -3px;
+}
+
+.logo-color-header {
+  color      : $logo-color;
+  margin-left: -15px;
 }
 
 body {
@@ -50,7 +75,8 @@ main {
   width           : 400px;
   margin-left     : -200px;
   border          : 1px solid $white;
-
+  box-shadow      : 0 0 30px -4px rgba(0,0,0,0.10);
+  
   .logo {
     text-align      : center;
     height          : 80px;
@@ -78,7 +104,7 @@ main {
   color         : $dark-gray;
   font-weight   : 300;
   letter-spacing: 0.6px;
-  height: auto;
+  height        : auto;
   display       : block;
   text-shadow   : 0 1px 2px #efefef;
   padding-right : 10px;
@@ -103,7 +129,8 @@ main {
   margin-top   : 14px;
   font-size    : 1pc;
   font-family  : 'Questrial', sans-serif;
-
+  
+  // text-transform: lowercase;
   &:focus {
     font-family: 'Questrial', sans-serif;
     color      : $logo-color;
@@ -129,12 +156,35 @@ main {
   font-family  : 'Questrial', sans-serif;
   font-size    : 16px;
   color        : $dark-gray;
-
+  
   &:hover {
     background-color: $logo-color;
     color           : white;
   }
+  
+  &:focus {
+    outline: none;
+  }
+}
 
+.site-button {
+  background   : none;
+  border       : 2px solid white;
+  border-radius: 20px;
+  text-align   : center;
+  width        : 350px;
+  height       : 40px;
+  margin       : 15px auto;
+  display      : block;
+  font-family  : 'Questrial', sans-serif;
+  font-size    : 16px;
+  color        : white;
+  
+  &:hover {
+    background-color: white;
+    color           : $logo-color;
+  }
+  
   &:focus {
     outline: none;
   }
@@ -150,7 +200,7 @@ main {
   border       : none;
   color        : #2daddc;
   border-radius: 25px;
-  padding      : 5px;
+  padding      : 10px;
   font-family  : 'Questrial', sans-serif;
 }
 
@@ -159,7 +209,7 @@ main {
   border       : none;
   color        : #3b5998;
   border-radius: 25px;
-  padding      : 5px;
+  padding      : 10px;
   font-family  : 'Questrial', sans-serif;
 }
 
@@ -168,7 +218,7 @@ main {
   border       : none;
   color        : #dd4b39;
   border-radius: 25px;
-  padding      : 5px;
+  padding      : 10px;
   font-family  : 'Questrial', sans-serif;
 }
 
@@ -177,8 +227,7 @@ main {
   border       : none;
   color        : $dark-gray;
   border-radius: 25px;
-  padding      : 5px;
-  margin-left  : 20px;
+  padding      : 10px;
   font-family  : 'Questrial', sans-serif;
 }
 
@@ -189,7 +238,7 @@ main {
   margin-top   : 20px;
   margin-bottom: 10px;
   color        : #f76e64;
-
+  
   &:hover {
     color: #f76e64;
   }
@@ -202,8 +251,12 @@ main {
   margin-top   : 20px;
   margin-bottom: 10px;
   color        : #f76e64;
-
+  
   &:hover {
     color: #f76e64;
   }
+}
+
+.connect-with {
+  text-align: center;
 }
