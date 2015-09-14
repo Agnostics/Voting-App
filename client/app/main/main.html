@@ -3,7 +3,7 @@
 <header class="hero-unit" id="banner">
   <div class="container">
     <div ng-hide="showPoll">
-      <h1>Create a Poll</h1>
+      <h1 class="home-title">Create a Poll</h1>
 
       <p class="lead">Create a quick and resposive poll to easily share!</p>
       <button class="site-button" ng-click="showPoll = true" type="submit">Make one now!</button>
@@ -26,9 +26,16 @@
       <img class="close-btn ease-in" ng-click="removeOption($index)" src="assets/images/delete30.png"/>
     </div>
 
-    <button class="option-button" ng-click="addOption()">New Option</button>
+    <button class="option-button" ng-click="addOption()" type="button">New Option</button>
     <button class="option-button" ng-click="addPoll()" type="submit">Create Poll</button>
 
+  </div>
+
+  <div class="alert alert-danger ease-in" ng-show="err" role="alert">
+    <span aria-hidden="true" class="glyphicon glyphicon-exclamation-sign"></span>
+    <span class="sr-only">Error:</span>
+    {{errMsg}}
+    <button class="close-err" ng-click="err = false" type="button">&times;</button>
   </div>
 
 </form>

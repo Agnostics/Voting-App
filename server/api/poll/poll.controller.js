@@ -14,17 +14,17 @@ exports.index = function (req, res) {
 };
 
 // Get a single poll
-// exports.show = function (req, res) {
-// 	Poll.findById(req.params.id, function (err, poll) {
-// 		if(err) {
-// 			return handleError(res, err);
-// 		}
-// 		if(!poll) {
-// 			return res.status(404).send('Not Found');
-// 		}
-// 		return res.json(poll);
-// 	});
-// };
+exports.showID = function (req, res) {
+	Poll.findById(req.params.id, function (err, poll) {
+		if(err) {
+			return handleError(res, err);
+		}
+		if(!poll) {
+			return res.status(404).send('Not Found');
+		}
+		return res.json(poll);
+	});
+};
 
 // Get user polls
 exports.user = function (req, res) {
@@ -69,24 +69,24 @@ exports.create = function (req, res) {
 
 // Updates an existing poll in the DB.
 exports.update = function (req, res) {
-	if(req.body._id) {
-		delete req.body._id;
-	}
+	console.log(req.body._id);
+
 	Poll.findById(req.params.id, function (err, poll) {
 		if(err) {
 			return handleError(res, err);
 		}
 		if(!poll) {
-			return res.status(404).send('Not Found');
+			return res.send(404);
 		}
-		var updated = _.merge(poll, req.body);
+		var updated = _.extend(poll, req.body);
 		updated.save(function (err) {
 			if(err) {
 				return handleError(res, err);
 			}
-			return res.status(200).json(poll);
+			return res.json(200, poll);
 		});
 	});
+
 };
 
 // Deletes a poll from the DB.

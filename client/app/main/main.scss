@@ -1,20 +1,36 @@
 #banner {
   border-bottom: none;
   margin-top   : -20px;
-}
-
-#banner h1 {
-  font-size     : 60px;
-  line-height   : 1;
-  letter-spacing: 5px;
-  font-family   : 'Questrial', sans-serif;
+  
+  .home-title {
+    font-size     : 60px;
+    line-height   : 1;
+    letter-spacing: 5px;
+    font-family   : 'Questrial', sans-serif;
+  }
 }
 
 .poll-title {
-  font-size     : 30px;
+  font-size     : 40px;
   line-height   : 1;
   letter-spacing: 5px;
   font-family   : 'Questrial', sans-serif;
+}
+
+.line-fix {
+  padding-top: 8px;
+  cursor     : pointer;
+}
+
+.alert {
+  color           : #fff;
+  background-color: #f76e64;
+  font-family     : 'Questrial', sans-serif;
+  font-size       : 20px;
+  text-align      : center;
+  width           : 400px;
+  border-radius   : 32px;
+  margin          : -26px auto;
 }
 
 .hero-unit {
@@ -225,10 +241,10 @@
 }
 
 .ease-in {
-  -webkit-animation: fade-in 1s ease-in;
-  -moz-animation   : fade-in 1s ease-in;
-  -o-animation     : fade-in 1s ease-in;
-  animation        : fade-in 1s ease-in;
+  -webkit-animation: fade-in 0.5s ease-in;
+  -moz-animation   : fade-in 0.5s ease-in;
+  -o-animation     : fade-in 0.5s ease-in;
+  animation        : fade-in 0.5s ease-in;
 }
 
 @-webkit-keyframes fade-in {
@@ -281,6 +297,21 @@
   padding-left: 15px;
 }
 
+.close-err {
+  float        : right;
+  font-size    : 25px;
+  font-weight  : bold;
+  padding-right: 10px;
+  line-height  : 1;
+  color        : #fff;
+  background   : none;
+  border       : none;
+  
+  &:focus {
+    outline: none;
+  }
+}
+
 .option-button {
   background   : none;
   border       : 2px solid #f76e64;
@@ -302,5 +333,42 @@
   
   &:focus {
     outline: none;
+  }
+}
+
+.poll-choice {
+  background   : none;
+  border       : 2px solid #f76e64;
+  border-radius: 20px;
+  text-align   : center;
+  width        : 300px;
+  height       : 50px;
+  margin       : 22px auto;
+  display      : block;
+  font-family  : 'Questrial', sans-serif;
+  font-size    : 29px;
+  color        : #6a6a6e;
+  outline      : none;
+  cursor       : pointer;
+  
+  a {
+    text-decoration: none;
+    color          : $dark-gray;
+    font-family    : 'Questrial', sans-serif;
+    outline        : none;
+  }
+  
+  &:hover {
+    background-color: $logo-color;
+    color           : white;
+    outline         : none;
+    
+    &:active {
+      outline: none;
+    }
+    
+    a {
+      color: white;
+    }
   }
 }
