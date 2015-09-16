@@ -19,7 +19,12 @@ angular.module('votingAppApp')
 				templateUrl: 'app/admin/admin.html',
 				controller: 'AdminCtrl'
 			})
-			.when('/:user/:poll', {
+
+		.when('/:user/:poll', {
+				templateUrl: 'app/polls/polls.html',
+				controller: 'PollsCtrl'
+			})
+			.when('/:user/:poll/:results', {
 				templateUrl: 'app/polls/polls.html',
 				controller: 'PollsCtrl'
 			});

@@ -13,6 +13,7 @@ router.patch('/:id', controller.update);
 router.delete('/:id', controller.destroy);
 
 router.get('/:user/polls', controller.user);
+router.get('/:user/:poll/:results', controller.results);
 router.get('/:user/:poll', controller.userPoll);
 
 module.exports = router;

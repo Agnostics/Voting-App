@@ -5,12 +5,27 @@ angular.module('votingAppApp')
 		$scope.allPolls = [];
 		$scope.latestPoll = [];
 		$scope.pollQuestion = '';
+		$scope.pollOptions = [];
+
+		$scope.colors = ['#97bbcd', '#dcdcdc', '#f7464a', '#46bfbd', '#fdb45c', '#949fb1', '#4d5360'];
+
+		$scope.getColor = function () {
+			for(var i = 0; i < $scope.pollOptions.length; i++) {
+				$scope.pollOptions[i].color = $scope.colors[i];
+			}
+		};
+
 		$scope.pollOptions = [{
-			'name': '',
-			'value': 0
+			'value': 0,
+			'color': '',
+			'label': '',
+			'per': 0
   }, {
-			'name': '',
-			'value': 0
+			'value': 0,
+			'color': '',
+			'label': '',
+			'per': 0
+
   }];
 
 		$scope.optionNumber = 2;
@@ -20,6 +35,9 @@ angular.module('votingAppApp')
 		$scope.showPollDone = false;
 		$scope.sameTitle = false;
 		$scope.err = false;
+		$scope.tt = false;
+
+		$scope.tooltipMSG = '';
 		$scope.errMsg = '';
 		$scope.replace = '';
 
@@ -30,7 +48,23 @@ angular.module('votingAppApp')
 
 		});
 
+		$scope.tooltip = function (val) {
+
+			$scope.tt = true;
+
+			if(val === 0) {
+				$scope.tooltipMSG = 'Makes sure only users can vote.';
+			}
+
+			if(val === 1) {
+				$scope.tooltipMSG = 'Allows multiple votes from the same location.';
+			}
+
+		};
+
 		$scope.addPoll = function () {
+
+			console.log($scope.pollOptions[0].label);
 
 			for(var i = 0; i < $scope.allPolls.length; i++) {
 				if($scope.allPolls[i].pollTitle === $scope.pollQuestion && $scope.allPolls[i].author === (Auth.getCurrentUser().name || 'lazy')) {
@@ -44,16 +78,18 @@ angular.module('votingAppApp')
 				return;
 			}
 
-			if($scope.pollOptions[0].name === '' || $scope.pollOptions[1].name === '') {
+			if($scope.pollOptions[0].label === '' || $scope.pollOptions[1].label === '') {
 				$scope.err = true;
 				$scope.errMsg = "Hmm.. did you forget an option?";
 				return;
 			}
+
+			$scope.getColor();
+
 			$http.post('/api/polls', {
 				author: Auth.getCurrentUser().name || 'lazy',
 				pollTitle: $scope.pollQuestion,
 				pollName: $scope.pollQuestion.replace(/[^\u4e00-\u9fa5a-zA-Z0-9]/g, '-').toString() + $scope.replace,
-
 				url: '/' + (Auth.getCurrentUser().name || 'lazy') + '/' + $scope.pollQuestion.replace(/[^\u4e00-\u9fa5a-zA-Z0-9]/g, '-') + $scope.replace,
 				data: $scope.pollOptions
 			});
@@ -69,8 +105,11 @@ angular.module('votingAppApp')
 
 		$scope.addOption = function () {
 			$scope.pollOptions.push({
-				'name': '',
-				'value': 0
+				'value': 0,
+				'color': '',
+				'label': '',
+				'per': 0
+
 			});
 		};
 

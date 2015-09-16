@@ -21,6 +21,12 @@ angular.module('votingAppApp')
 			$location.path(path);
 		};
 
+		$scope.myPolls = function () {
+
+			return '/' + Auth.getCurrentUser().name + '/polls';
+
+		};
+
 		$scope.isActive = function (route) {
 			return route === $location.path();
 		};

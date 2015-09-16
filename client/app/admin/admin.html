@@ -18,9 +18,10 @@
         <h1 class="page-header">Polls:</h1>
         <ul class="nav nav-tabs nav-stacked col-md-4 col-lg-4 col-sm-6" ng-repeat="poll in allPolls">
           <li>
-            <a href="#" tooltip="{{poll.info}}">{{poll.pollTitle}}
-              <button class="close" ng-click="deletePoll(poll)" type="button">&times;</button>
-            </a>
+            <a href="{{poll.url}}">{{poll.pollTitle}}
+              ({{poll.author}})</a>
+
+            <button class="close" ng-click="deletePoll(poll)" type="button">&times;</button>
           </li>
         </ul>
       </div>

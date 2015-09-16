@@ -17,13 +17,29 @@
   </div>
 
 </header>
+
 <form>
 
   <div class="options-contain sample-show-hide" ng-show="showPoll && !finishPoll">
 
     <div class="option-choice" ng-repeat="pollOption in pollOptions track by $index">
-      <input class="option-input-box ease-in" ng-model="pollOption.name" placeholder="Enter Option">
+      <input class="option-input-box ease-in" ng-model="pollOption.label" placeholder="Enter Option">
       <img class="close-btn ease-in" ng-click="removeOption($index)" src="assets/images/delete30.png"/>
+    </div>
+
+    <div class="checkboxes">
+      <input id="a" type="checkbox"/>
+      <label class="green-background" for="a"></label>
+      <div class="box-label">Users only
+        <a ng-click="tooltip(0)">(?)</a>
+      </div>
+
+      <input id="b" type="checkbox"/>
+      <label class="green-background" for="b"></label>
+      <div class="box-label" data-placement="bottom" data-toggle="tooltip">Same location
+        <a class="add-click" ng-click="tooltip(1)">(?)</a>
+      </div>
+
     </div>
 
     <button class="option-button" ng-click="addOption()" type="button">New Option</button>
@@ -36,6 +52,13 @@
     <span class="sr-only">Error:</span>
     {{errMsg}}
     <button class="close-err" ng-click="err = false" type="button">&times;</button>
+  </div>
+
+  <div class="alert-custom alert-danger ease-in" ng-show="tt" role="alert">
+    <span aria-hidden="true" class="glyphicon glyphicon-question-sign"></span>
+    <span class="sr-only">Error:</span>
+    {{tooltipMSG}}
+    <button class="close-ttp" ng-click="tt = false" type="button">&times;</button>
   </div>
 
 </form>
