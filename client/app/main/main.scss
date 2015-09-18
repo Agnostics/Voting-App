@@ -1,7 +1,59 @@
+@media (max-width: 360px) {main {
+    width: 360px !important;
+    left : 55%;
+    top  : 46%;
+    .input-label {
+      display: none;
+    }
+    .input-box {
+      width: 100%;
+    }
+  }
+  .option-button {
+    margin: 15px 5px !important;
+  }
+  .option-input-box {
+    width: 270px !important;
+  }
+  .site-button {
+    width: 300px !important;
+  }
+  .nav {li {
+      padding-left: 36px;
+    }
+  }
+}
+@media (max-width: 320px) {main {
+    width: 320px !important;
+    left : 62%;
+    top  : 46%;
+    .input-label {
+      display: none;
+    }
+    .input-box {
+      width: 100%;
+    }
+  }
+  .login-button {
+    width: 320px;
+  }
+  .option-button {
+    margin: 15px 5px !important;
+  }
+  .option-input-box {
+    width: 246px !important;
+  }
+  .site-button {
+    width: 250px !important;
+  }
+  .nav {li {
+      padding-left: 36px;
+    }
+  }
+}
 #banner {
   border-bottom: none;
   margin-top   : -20px;
-  
   .home-title {
     font-size     : 60px;
     line-height   : 1;
@@ -9,30 +61,31 @@
     font-family   : 'Questrial', sans-serif;
   }
 }
-
 .poll-title {
   font-size     : 40px;
   line-height   : 1;
   letter-spacing: 5px;
   font-family   : 'Questrial', sans-serif;
 }
-
+.option-value {
+  position: absolute;
+}
 .line-fix {
   padding-top: 8px;
   cursor     : pointer;
 }
-
 .alert {
   color           : #fff;
-  background-color: #f76e64;
+  background-color: $logo-color;
   font-family     : 'Questrial', sans-serif;
-  font-size       : 20px;
+  font-size       : 15px;
   text-align      : center;
   width           : 400px;
   border-radius   : 32px;
-  margin          : -26px auto;
+  padding         : 6px;
+  margin          : 0 auto;
+  margin-bottom: 21px;
 }
-
 .hero-unit {
   position   : relative;
   padding    : 30px 15px;
@@ -42,38 +95,31 @@
   background : $logo-color;
   font-family: 'Questrial', sans-serif;
 }
-
 .footer {
   text-align     : center;
-  padding        : 30px 0;
-  margin-top     : 70px;
+  padding        : 10px 0;
   border-top     : 1px solid #e5e5e5;
   font-family    : 'Questrial', sans-serif;
   color          : $dark-gray;
   text-decoration: none;
   letter-spacing : 2px;
-  
   &:hover {
     color: $logo-color;
   }
-  
   a {
     text-decoration: none;
     color          : $dark-gray;
-    
     &:hover {
       color: $logo-color;
     }
   }
 }
-
 .navbar-text {
   margin-left: 15px;
   margin-top : 25px;
   font-family: 'Questrial', sans-serif;
   font-size  : 18px;
 }
-
 .navbar-brand-me {
   color         : $dark-gray;
   display       : inline-block;
@@ -81,13 +127,19 @@
   font-family   : 'Questrial', sans-serif;
   font-size     : 32px;
   letter-spacing: 7px;
-  
+  cursor        : pointer;
   &:hover {
     text-decoration: none;
     color          : $dark-gray;
   }
 }
-
+.nav {li {
+    position: relative;
+    display : inline-flex;
+    /* text-align: center; */
+    margin  : 0 auto;
+  }
+}
 .menu-button {
   background   : none;
   border       : 2px solid $logo-color;
@@ -101,36 +153,30 @@
   font-size    : 16px;
   color        : $dark-gray;
   outline      : none;
-  
   a {
     text-decoration: none;
     color          : $dark-gray;
     font-family    : 'Questrial', sans-serif;
     outline        : none;
   }
-  
   &:hover {
     background-color: $logo-color;
     color           : white;
     outline         : none;
-    
     &:active {
       outline: none;
     }
-    
     a {
       color: white;
     }
   }
 }
-
 .main-input-box::-webkit-input-placeholder {
   color         : white;
   text-align    : center;
   font-size     : 30px;
   letter-spacing: 10px;
 }
-
 .main-input-box:-moz-placeholder {
   /* Firefox 18- */
   color         : white;
@@ -138,7 +184,6 @@
   font-size     : 30px;
   letter-spacing: 10px;
 }
-
 .main-input-box::-moz-placeholder {
   /* Firefox 19+ */
   color         : white;
@@ -146,12 +191,117 @@
   font-size     : 30px;
   letter-spacing: 10px;
 }
-
 .main-input-box:-ms-input-placeholder {
   color         : white;
   text-align    : center;
   font-size     : 30px;
   letter-spacing: 10px;
+}
+@mixin keyframes($name) {@-webkit-keyframes #{$name} {
+    @content
+  }
+  @-moz-keyframes #{$name} {
+    @content
+  }
+  @-ms-keyframes #{$name} {
+    @content
+  }
+  @-o-keyframes #{$name} {
+    @content
+  }
+  @keyframes #{$name} {
+    @content
+  }
+}
+@mixin animation($value) {
+  -webkit-animation: $value;
+  -moz-animation   : $value;
+  -ms-animation    : $value;
+  -o-animation     : $value;
+  animation        : $value;
+}
+
+/* ========= */
+.checkboxes {a {
+    cursor         : pointer;
+    text-decoration: none;
+    color          : $dark-gray;
+    &:hover {
+      color: $logo-color;
+    }
+  }
+  div {
+    color         : $dark-gray;
+    display       : inline-block;
+    vertical-align: super;
+    margin        : 0 -22px;
+    font-family   : 'Questrial', sans-serif;
+    padding-right : 35px;
+    font-size     : 18px;
+  }
+  label {
+    display            : inline-block;
+    user-select        : none;
+    position           : relative;
+    width              : 25px;
+    height             : 25px;
+    border             : 2px solid rgba(0, 0, 0, 0.3);
+    border-radius      : (15px);
+    transition-duration: (0.25s);
+    cursor             : pointer;
+    overflow           : hidden;
+    color              : rgba(0, 0, 0, 0.1);
+    text-align         : center;
+    margin             : 0 25px;
+    &:after {
+      content     : '';
+      display     : block;
+      margin-left : 6px;
+      margin-top  : 1px;
+      width       : 9px;
+      height      : 18px;
+      border      : solid rgba(0, 0, 0, 0.1);
+      border-width: 0 6px 6px 0;
+      transform   : (rotate(45deg));
+    }
+    &:hover {
+      border: 2px solid rgba(0, 0, 0, 0.5);
+      color : $logo-color;
+    }
+    &:active {
+      transition-duration: (0);
+      -webkit-filter     : brightness(0.8);
+    }
+  }
+  input {
+    display: none;
+    &:checked + {label {
+        color: $logo-color;
+      }
+      .green-background {
+        border-color: $logo-color;
+        background  : $logo-color;
+        &:after {
+          content     : '';
+          display     : block;
+          margin-left : 6px;
+          margin-top  : 1px;
+          width       : 9px;
+          height      : 18px;
+          border      : solid rgba(255, 255, 255, 1);
+          border-width: 0 6px 6px 0;
+          transform   : (rotate(45deg));
+        }
+      }
+      label {
+        animation: (boom 0.5s ease);
+      }
+    }
+  }
+}
+@include keyframes(boom) {25% {
+    transform: (scale(1.25));
+  }
 }
 
 //
@@ -161,7 +311,6 @@
   font-size     : 24px;
   letter-spacing: 10px;
 }
-
 .option-input-box:-moz-placeholder {
   /* Firefox 18- */
   color         : $dark-gray;
@@ -169,7 +318,6 @@
   font-size     : 24px;
   letter-spacing: 10px;
 }
-
 .option-input-box::-moz-placeholder {
   /* Firefox 19+ */
   color         : $dark-gray;
@@ -177,14 +325,12 @@
   font-size     : 24px;
   letter-spacing: 10px;
 }
-
 .option-input-box:-ms-input-placeholder {
   color         : $dark-gray;
   text-align    : center;
   font-size     : 24px;
   letter-spacing: 10px;
 }
-
 .main-input-box {
   background    : transparent;
   border        : none;
@@ -200,27 +346,23 @@
   font-family   : 'Questrial', sans-serif;
   text-align    : center;
   letter-spacing: 5px;
-  
   &:focus {
     font-family: 'Questrial', sans-serif;
     color      : white;
   }
 }
-
 .options-contain {
-  margin-top : 10px;
+  margin-top : -25px;
   position   : relative;
   padding    : 30px 15px;
   color      : #f5f5f5;
   text-align : center;
   text-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
-  /* background: #f76e64; */
 }
-
 .option-input-box {
   background    : transparent;
   border        : none;
-  border-bottom : 2px solid #f76e64;
+  border-bottom : 2px solid $logo-color;
   outline       : 0;
   box-shadow    : none;
   color         : #6a6a6e;
@@ -233,57 +375,48 @@
   text-align    : center;
   letter-spacing: 5px;
   display       : inline-block;
-  
   &:focus {
     font-family: 'Questrial', sans-serif;
     color      : $logo-color;
   }
 }
-
 .ease-in {
   -webkit-animation: fade-in 0.5s ease-in;
   -moz-animation   : fade-in 0.5s ease-in;
   -o-animation     : fade-in 0.5s ease-in;
   animation        : fade-in 0.5s ease-in;
 }
-
-@-webkit-keyframes fade-in {
-  0% {
+@-webkit-keyframes fade-in {0% {
     opacity: 0;
   }
   100% {
     opacity: 1;
   }
 }
-@-moz-keyframes fade-in {
-  0% {
+@-moz-keyframes fade-in {0% {
     opacity: 0;
   }
   100% {
     opacity: 1;
   }
 }
-@-o-keyframes fade-in {
-  0% {
+@-o-keyframes fade-in {0% {
     opacity: 0;
   }
   100% {
     opacity: 1;
   }
 }
-@keyframes fade-in {
-  0% {
+@keyframes fade-in {0% {
     opacity: 0;
   }
   100% {
     opacity: 1;
   }
 }
-
 .option-choice {
   padding: 20px 0;
 }
-
 .box-color {
   height       : 35px;
   width        : 35px;
@@ -292,29 +425,48 @@
   display      : inline-block;
   border-radius: 10px;
 }
-
 .close-btn {
   padding-left: 15px;
+  cursor      : pointer;
 }
-
+.close-btn-poll {
+  @extend .close;
+  cursor            : pointer;
+  background        : transparent;
+  border            : 0;
+  -webkit-appearance: none;
+  margin-top        : -46px;
+  margin-right      : 20px;
+}
 .close-err {
   float        : right;
   font-size    : 25px;
   font-weight  : bold;
   padding-right: 10px;
-  line-height  : 1;
+  line-height  : 0.7;
   color        : #fff;
   background   : none;
   border       : none;
-  
   &:focus {
     outline: none;
   }
 }
-
+.close-ttp {
+  float        : right;
+  font-size    : 25px;
+  font-weight  : bold;
+  padding-right: 10px;
+  line-height  : 0.6;
+  color        : #fff;
+  background   : none;
+  border       : none;
+  &:focus {
+    outline: none;
+  }
+}
 .option-button {
   background   : none;
-  border       : 2px solid #f76e64;
+  border       : 2px solid $logo-color;
   border-radius: 20px;
   text-align   : center;
   width        : 150px;
@@ -325,20 +477,17 @@
   font-size    : 16px;
   color        : #6a6a6e;
   outline      : none;
-  
   &:hover {
     background-color: $logo-color;
     color           : white;
   }
-  
   &:focus {
     outline: none;
   }
 }
-
 .poll-choice {
   background   : none;
-  border       : 2px solid #f76e64;
+  border       : 2px solid $logo-color;
   border-radius: 20px;
   text-align   : center;
   width        : 300px;
@@ -350,25 +499,101 @@
   color        : #6a6a6e;
   outline      : none;
   cursor       : pointer;
-  
+  padding-top  : 3px;
   a {
     text-decoration: none;
     color          : $dark-gray;
     font-family    : 'Questrial', sans-serif;
     outline        : none;
   }
-  
+  div {
+    color: $logo-color;
+  }
   &:hover {
     background-color: $logo-color;
     color           : white;
     outline         : none;
-    
     &:active {
       outline: none;
     }
-    
     a {
       color: white;
     }
   }
+}
+.go-home {
+  margin    : 0 auto;
+  text-align: center;
+  cursor    : pointer;
+}
+.modalz {
+  position        : absolute;
+  
+  // top             : 123px;
+  background-color: $dark-gray;
+}
+.remove-poll {
+  position     : absolute;
+  float        : right;
+  font-size    : 25px;
+  font-weight  : bold;
+  padding-right: 10px;
+  line-height  : 0.6;
+  color        : $dark-gray;
+  background   : none;
+  border       : none;
+  margin       : -44px 321px;
+  font-family  : 'Questrial', sans-serif;
+  &:focus {
+    outline: none;
+  }
+  &:hover {
+    color: $logo-color;
+  }
+}
+.pie-chart {
+  float   : left;
+  display : inline-block;
+  position: absolute;
+  top     : -400%;
+  left    : 63%;
+}
+.chart-container {
+  width     : 50%;
+  float     : right;
+  margin-top: 40px;
+}
+.option-button-skip {
+  @extend .option-button;
+  margin-top: 10px;
+}
+.option-button-copy {
+  @extend .option-button;
+  margin-top : 10px;
+  margin-left: 25px;
+}
+.progress-container {
+  margin-top : 30px;
+  max-width  : 500px;
+  margin-left: 15%;
+  font-family: 'Questrial', sans-serif;
+  label {
+    color         : #6a6a6e;
+    font-size     : 19px;
+    letter-spacing: 4px;
+  }
+}
+.progress {
+  max-width: 400px;
+}
+.progress-bar {
+  font-size  : 14px;
+  font-family: 'Questrial', sans-serif;
+}
+.home {
+  margin-top : 50px;
+  color      : #6a6a6e;
+  font-family: 'Questrial', sans-serif;
+  font-size  : 20px;
+  text-align : center;
 }

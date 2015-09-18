@@ -123,6 +123,26 @@ UserSchema
 		});
 	}, 'Username is already registered.')
 
+// Validate username is not taken or conflicting with routes
+UserSchema
+	.path('name')
+	.validate(function (value, respond) {
+		var self = this;
+		if(self.name === 'polls' || self.name === 'admin' || self.name === 'login' || self.name === 'signup' || self.name === 'settings' || self.name === 'logout' || self.name === 'count' || self.name === 'googl' || self.name === 'poll') {
+			return respond(false);
+		}
+		this.constructor.findOne({
+			name: value
+		}, function (err, user) {
+			if(err) throw err;
+			if(user) {
+				if(self.id === user.id) return respond(true);
+				return respond(false);
+			}
+			respond(true);
+		});
+	}, 'Username is already registered.')
+
 var validatePresenceOf = function (value) {
 	return value && value.length;
 };

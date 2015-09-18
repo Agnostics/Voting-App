@@ -15,6 +15,7 @@ exports.index = function (req, res) {
 
 // Get a single poll
 exports.showID = function (req, res) {
+
 	Poll.findById(req.params.id, function (err, poll) {
 		if(err) {
 			return handleError(res, err);
@@ -28,6 +29,7 @@ exports.showID = function (req, res) {
 
 // Get user polls
 exports.user = function (req, res) {
+
 	Poll.find({
 		author: req.params.user
 	}, function (err, polls) {
@@ -43,6 +45,22 @@ exports.user = function (req, res) {
 
 // Get single user poll
 exports.userPoll = function (req, res) {
+	Poll.find({
+		author: req.params.user,
+		pollName: req.params.poll
+	}, function (err, poll) {
+		if(err) {
+			return handleError(res, err);
+		}
+		if(!poll) {
+			return res.send(404);
+		}
+
+		return res.json(poll);
+	});
+};
+
+exports.results = function (req, res) {
 	Poll.find({
 		author: req.params.user,
 		pollName: req.params.poll
@@ -69,7 +87,6 @@ exports.create = function (req, res) {
 
 // Updates an existing poll in the DB.
 exports.update = function (req, res) {
-	console.log(req.body._id);
 
 	Poll.findById(req.params.id, function (err, poll) {
 		if(err) {
