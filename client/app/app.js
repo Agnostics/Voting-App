@@ -7,8 +7,8 @@ angular.module('votingAppApp', [
   'ngRoute',
   'btford.socket-io',
   'ui.bootstrap',
-  'chart.js',
-  'angular-clipboard'
+  'angular-clipboard',
+  'chart.js'
 
 ])
 	.config(function ($routeProvider, $locationProvider, $httpProvider) {

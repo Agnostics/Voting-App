@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('votingAppApp')
-	.controller('NavbarCtrl', function ($scope, $location, Auth, $route, $routeParams) {
+	.controller('NavbarCtrl', function ($scope, $location, Auth, $route) {
 		$scope.menu = [{
 			'title': 'Home',
 			'link': '/'

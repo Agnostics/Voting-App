@@ -58,7 +58,7 @@ angular.module('votingAppApp')
 				$scope.userPoll = poll;
 				$scope.options = true;
 
-				$scope.textToCopy = $location.$$host + ':' + $location.$$port + '/' + $routeParams.user + '/' + $routeParams.poll + '/';
+				$scope.textToCopy = $location.$$host + '/' + $routeParams.user + '/' + $routeParams.poll + '/';
 			}
 
 			if($routeParams.results === 'results' && $scope.userPoll[0] !== undefined) {
