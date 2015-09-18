@@ -13,7 +13,9 @@ $btnGooglePlusBackgroundHighlight: #c53727;
 $btnGithubBackground: #fafafa;
 $btnGithubBackgroundHighlight: #ccc;
 $white: #eee;
-$logo-color: #f76e64;
+
+// $logo-color: #f76e64;
+$logo-color: #59c6c6;
 $dark-gray: #6a6a6e;
 
 // Social buttons
@@ -30,21 +32,7 @@ $dark-gray: #6a6a6e;
 .btn-github {
   @include button-variant($btnTextAlt, $btnGithubBackground, $btnGithubBackgroundHighlight);
 }
-.gradient-color {
-  background: #f44b3f;
-  background: -moz-linear-gradient(top, #f44b3f 0%, #f76e64 48%, #f2cbc9 100%);
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%,#f44b3f), color-stop(48%,#f76e64), color-stop(100%,#f2cbc9));
-  background: -webkit-linear-gradient(top, #f44b3f 0%,#f76e64 48%,#f2cbc9 100%);
-  background: -o-linear-gradient(top, #f44b3f 0%,#f76e64 48%,#f2cbc9 100%);
-  background: -ms-linear-gradient(top, #f44b3f 0%,#f76e64 48%,#f2cbc9 100%);
-  background: linear-gradient(to bottom, #f44b3f 0%,#f76e64 48%,#f2cbc9 100%);
-  filter:progid:DXImageTransform.Microsoft.gradient( startColorstr='#f44b3f', endColorstr='#f2cbc9',GradientType=0 );
-}
 .logo-color-grade {
-  
-  // @extend  .gradient-color;
-  // -webkit-background-clip: text;
-  // -webkit-text-fill-color: transparent;
   color: $logo-color;
 }
 .logo-color {
@@ -213,9 +201,9 @@ main {
   padding      : 5px 20px;
   margin-top   : 20px;
   margin-bottom: 10px;
-  color        : #f76e64;
+  color        : $logo-color;
   &:hover {
-    color: #f76e64;
+    color: $logo-color;
   }
 }
 .register {
@@ -224,11 +212,18 @@ main {
   padding      : 5px 20px;
   margin-top   : 20px;
   margin-bottom: 10px;
-  color        : #f76e64;
+  color        : $logo-color;
   &:hover {
-    color: #f76e64;
+    color: $logo-color;
   }
 }
 .connect-with {
   text-align: center;
+}
+.fa-check {
+  margin-left: 305px;
+  margin-top : -41px;
+  display    : flex;
+  display    : flex;
+  font-size  : 37px;
 }

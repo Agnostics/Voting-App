@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('votingAppApp')
-	.controller('NavbarCtrl', function ($scope, $location, Auth, $route) {
+	.controller('NavbarCtrl', function ($scope, $location, Auth, $route, $routeParams) {
 		$scope.menu = [{
 			'title': 'Home',
 			'link': '/'
@@ -19,6 +19,13 @@ angular.module('votingAppApp')
 
 		$scope.go = function (path) {
 			$location.path(path);
+		};
+
+		$scope.reload = function () {
+
+			$route.reload();
+			$scope.go('/');
+
 		};
 
 		$scope.myPolls = function () {

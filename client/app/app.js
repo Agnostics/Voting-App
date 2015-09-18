@@ -7,7 +7,8 @@ angular.module('votingAppApp', [
   'ngRoute',
   'btford.socket-io',
   'ui.bootstrap',
-  'chart.js'
+  'chart.js',
+  'angular-clipboard'
 
 ])
 	.config(function ($routeProvider, $locationProvider, $httpProvider) {
@@ -48,6 +49,7 @@ angular.module('votingAppApp', [
 })
 
 .run(function ($rootScope, $location, Auth) {
+
 	// Redirect to login if route requires auth and you're not logged in
 	$rootScope.$on('$routeChangeStart', function (event, next) {
 		Auth.isLoggedInAsync(function (loggedIn) {

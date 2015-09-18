@@ -6,6 +6,7 @@ angular.module('votingAppApp')
 		$scope.latestPoll = [];
 		$scope.pollQuestion = '';
 		$scope.pollOptions = [];
+		$scope.userCheck = false;
 
 		$scope.colors = ['#97bbcd', '#dcdcdc', '#f7464a', '#46bfbd', '#fdb45c', '#949fb1', '#4d5360'];
 
@@ -91,7 +92,8 @@ angular.module('votingAppApp')
 				pollTitle: $scope.pollQuestion,
 				pollName: $scope.pollQuestion.replace(/[^\u4e00-\u9fa5a-zA-Z0-9]/g, '-').toString() + $scope.replace,
 				url: '/' + (Auth.getCurrentUser().name || 'lazy') + '/' + $scope.pollQuestion.replace(/[^\u4e00-\u9fa5a-zA-Z0-9]/g, '-') + $scope.replace,
-				data: $scope.pollOptions
+				data: $scope.pollOptions,
+				userCheck: $scope.userCheck
 			});
 
 			var last = $scope.allPolls.length;

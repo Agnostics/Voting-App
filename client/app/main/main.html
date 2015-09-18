@@ -6,7 +6,7 @@
       <h1 class="home-title">Create a Poll</h1>
 
       <p class="lead">Create a quick and resposive poll to easily share!</p>
-      <button class="site-button" ng-click="showPoll = true" type="submit">Make one now!</button>
+      <button class="site-button" ng-click="showPoll = true" ng-href="{{'/' + author + '?action=create'}}" type="submit">Make one now!</button>
     </div>
 
     <div ng-show="showPollDone">
@@ -29,7 +29,7 @@
 
     <div class="checkboxes">
       <input id="a" type="checkbox"/>
-      <label class="green-background" for="a"></label>
+      <label class="green-background" for="a" ng-click="userCheck = !userCheck"></label>
       <div class="box-label">Users only
         <a ng-click="tooltip(0)">(?)</a>
       </div>
@@ -47,14 +47,14 @@
 
   </div>
 
-  <div class="alert alert-danger ease-in" ng-show="err" role="alert">
+  <div class="alert alert-danger ease-in" ng-click="err = false" ng-show="err" role="alert">
     <span aria-hidden="true" class="glyphicon glyphicon-exclamation-sign"></span>
     <span class="sr-only">Error:</span>
     {{errMsg}}
     <button class="close-err" ng-click="err = false" type="button">&times;</button>
   </div>
 
-  <div class="alert-custom alert-danger ease-in" ng-show="tt" role="alert">
+  <div class="alert alert-danger ease-in" ng-click="tt = false" ng-show="tt" role="alert">
     <span aria-hidden="true" class="glyphicon glyphicon-question-sign"></span>
     <span class="sr-only">Error:</span>
     {{tooltipMSG}}
@@ -66,11 +66,13 @@
 <footer class="footer">
   <div class="container">
     <p>
-      <a href="http://www.freecodecamp.com/">FreeCodeCamp</a>
-      |
-      <a href="https://twitter.com/_BrandonPadilla">@BrandonPadilla</a>
-      |
-      <a href="https://github.com/Agnostics/Voting-App">@Github</a>
+
+      <a href="freecodecamp.com">FreeCodeCamp</a>
+      <span style=" color: #59c6c6">|</span>
+      <a href="https://twitter.com/_BrandonPadilla">Twitter</a>
+      <span style=" color: #59c6c6">|</span>
+      <a href="https://github.com/Agnostics/Voting-App/issues">Issue Tracker</a>
+
     </p>
   </div>
 </footer>

@@ -55,6 +55,7 @@ exports.userPoll = function (req, res) {
 		if(!poll) {
 			return res.send(404);
 		}
+
 		return res.json(poll);
 	});
 };
@@ -86,7 +87,6 @@ exports.create = function (req, res) {
 
 // Updates an existing poll in the DB.
 exports.update = function (req, res) {
-	console.log(req.body._id);
 
 	Poll.findById(req.params.id, function (err, poll) {
 		if(err) {

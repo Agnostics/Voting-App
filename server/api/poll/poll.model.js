@@ -9,7 +9,9 @@ var PollSchema = new Schema({
 	pollName: String,
 	data: Array,
 	url: String,
-	per: Number
+	per: Number,
+	voted: Array,
+	userCheck: Boolean
 });
 
 module.exports = mongoose.model('Poll', PollSchema);

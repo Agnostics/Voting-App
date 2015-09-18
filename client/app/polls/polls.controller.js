@@ -10,6 +10,8 @@ angular.module('votingAppApp')
 		$scope.options = false;
 		$scope.nothing = false;
 		$scope.results = false;
+		$scope.canVote = true;
+		$scope.check = false;
 		$scope.total = 0;
 		$scope.totalArr = [];
 
@@ -17,6 +19,7 @@ angular.module('votingAppApp')
 
 		$scope.labels = [];
 		$scope.data = [];
+		$scope.textToCopy = '';
 
 		if(Auth.getCurrentUser().name === $routeParams.user) {
 
@@ -37,8 +40,10 @@ angular.module('votingAppApp')
 
 		if($routeParams.poll === 'polls') {
 			$scope.showAll = true;
+
 		} else {
 			$scope.showAll = false;
+
 		}
 
 		$http.get('/api/polls/' + $routeParams.user + '/' + $routeParams.poll).success(function (poll) {
@@ -53,7 +58,9 @@ angular.module('votingAppApp')
 				$scope.userPoll = poll;
 				$scope.options = true;
 
+				$scope.textToCopy = $location.$$host + ':' + $location.$$port + '/' + $routeParams.user + '/' + $routeParams.poll + '/';
 			}
+
 			if($routeParams.results === 'results' && $scope.userPoll[0] !== undefined) {
 				$scope.results = true;
 				$scope.options = false;
@@ -112,6 +119,11 @@ angular.module('votingAppApp')
 
 			}
 
+			if($routeParams.poll !== 'polls' && $scope.userPoll[0].userCheck) {
+
+				$scope.checkVote();
+			}
+
 			socket.syncUpdates('poll', $scope.allPolls);
 
 		});
@@ -120,11 +132,31 @@ angular.module('votingAppApp')
 			socket.unsyncUpdates('poll');
 		});
 
+		$scope.checkVote = function () {
+
+			$scope.userPoll[0].voted.forEach(function (elem) {
+
+				if(elem === Auth.getCurrentUser().name) {
+					$scope.canVote = false;
+					$location.path('/' + $routeParams.user + '/' + $routeParams.poll + '/' + 'results');
+
+				} else {
+
+					$scope.canVote = true;
+
+				}
+
+			});
+
+		};
+
 		$scope.deletePoll = function (poll) {
 
-			if($routeParams.user === Auth.getCurrentUser()) {
+			if($routeParams.user === Auth.getCurrentUser().name) {
 
 				$http.delete('/api/polls/' + poll._id);
+			} else {
+				console.log('cant');
 			}
 
 		};
@@ -136,6 +168,12 @@ angular.module('votingAppApp')
 			} else {
 				$location.path(url);
 			}
+
+		};
+
+		$scope.go = function (url) {
+
+			$location.path(url);
 
 		};
 
@@ -152,14 +190,26 @@ angular.module('votingAppApp')
 
 		$scope.vote = function (option) {
 
-			var index = functiontofindIndexByKeyValue($scope.userPoll[0].data, 'label', option);
+			if($scope.userPoll[0].userCheck && Auth.getCurrentUser().name === undefined) {
+				$scope.canVote = false;
+				$location.path('/' + 'login');
+			}
 
-			$scope.userPoll[0].data[index].value++;
+			if($scope.canVote) {
 
-			$http.put('/api/polls/' + $scope.userPoll[0]._id, $scope.userPoll[0]);
-			socket.syncUpdates('poll', $scope.userPoll);
+				$scope.userPoll[0].voted.push(Auth.getCurrentUser().name);
 
-			$location.path('/' + $routeParams.user + '/' + $routeParams.poll + '/' + 'results');
+				var index = functiontofindIndexByKeyValue($scope.userPoll[0].data, 'label', option);
+
+				$scope.userPoll[0].data[index].value++;
+
+				$http.put('/api/polls/' + $scope.userPoll[0]._id, $scope.userPoll[0]);
+				socket.syncUpdates('poll', $scope.userPoll);
+				$scope.canVote = false;
+
+				$location.path('/' + $routeParams.user + '/' + $routeParams.poll + '/' + 'results');
+
+			}
 
 		};
 
