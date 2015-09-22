@@ -28,12 +28,19 @@
   </div>
 </div>
 
-<!--Poll Page  -->
+<!--Poll Page Options  -->
 <div class="options-contain" ng-show="options">
 
   <div class="poll-choice" ng-click="vote(option.label)" ng-mouseenter="check = true" ng-mouseleave="check = false" ng-repeat="option in userPoll[0].data">
     {{option.label}}
     <div class="fa fa-check" ng-show="check"></div>
+  </div>
+
+  <div class="alert alert-danger ease-in" ng-show="already" role="alert">
+    <span aria-hidden="true" class="glyphicon glyphicon-exclamation-sign"></span>
+    <span class="sr-only">Error:</span>
+    {{errMsg}}
+    <button class="close-err" ng-click="already = false" type="button">&times;</button>
   </div>
 
   <button class="option-button-copy" clipboard on-copied="success()" on-error="fail(err)" text="textToCopy">
@@ -46,7 +53,7 @@
   </button>
 </div>
 
-<!-- Results Page -->
+<!-- Results Page Final-->
 <div class="container" ng-show="results">
 
   <canvas chart-data="data" chart-labels="labels" chart-legend="true" chart-options="{animation: false}" class="chart chart-doughnut" getColour id="doughnut"></canvas>
@@ -60,6 +67,13 @@
           ({{option.per | number:0}}%)
         </div>
       </div>
+    </div>
+
+    <div class="alert alert-danger ease-in" ng-show="already" role="alert">
+      <span aria-hidden="true" class="glyphicon glyphicon-exclamation-sign"></span>
+      <span class="sr-only">Error:</span>
+      {{errMsg}}
+      <button class="close-err" ng-click="already = false" type="button">&times;</button>
     </div>
 
     <button class="option-button-copy" clipboard on-copied="success()" on-error="fail(err)" text="textToCopy">

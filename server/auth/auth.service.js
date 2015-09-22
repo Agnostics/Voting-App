@@ -40,7 +40,9 @@ function isAuthenticated() {
 /**
  * Checks if the user role meets the minimum requirements of the route
  */
+
 function hasRole(roleRequired) {
+
 	if(!roleRequired) throw new Error('Required role needs to be set');
 
 	return compose()

@@ -61,11 +61,13 @@ angular.module('votingAppApp')
 				$scope.tooltipMSG = 'Allows multiple votes from the same location.';
 			}
 
+			if(val === 2) {
+				$scope.tooltipMSG = 'Allows a new option to be created by the voter.';
+			}
+
 		};
 
 		$scope.addPoll = function () {
-
-			console.log($scope.pollOptions[0].label);
 
 			for(var i = 0; i < $scope.allPolls.length; i++) {
 				if($scope.allPolls[i].pollTitle === $scope.pollQuestion && $scope.allPolls[i].author === (Auth.getCurrentUser().name || 'lazy')) {

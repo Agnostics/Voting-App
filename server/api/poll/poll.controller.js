@@ -39,12 +39,17 @@ exports.user = function (req, res) {
 		if(!polls) {
 			return res.send(404);
 		}
+
+		res.send(req.ip);
 		return res.json(polls);
 	});
+
 };
 
+
 // Get single user poll
-exports.userPoll = function (req, res) {
+exports.userPoll = function (req, res, ip) {
+
 	Poll.find({
 		author: req.params.user,
 		pollName: req.params.poll
