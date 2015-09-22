@@ -10,12 +10,7 @@ angular.module('votingAppApp')
 
 		$scope.colors = ['#97bbcd', '#dcdcdc', '#f7464a', '#46bfbd', '#fdb45c', '#949fb1', '#4d5360'];
 
-		$scope.getColor = function () {
-			for(var i = 0; i < $scope.pollOptions.length; i++) {
-				$scope.pollOptions[i].color = $scope.colors[i];
-			}
-		};
-
+		//Start poll with 2 options
 		$scope.pollOptions = [{
 			'value': 0,
 			'color': '',
@@ -26,7 +21,6 @@ angular.module('votingAppApp')
 			'color': '',
 			'label': '',
 			'per': 0
-
   }];
 
 		$scope.optionNumber = 2;
@@ -42,30 +36,32 @@ angular.module('votingAppApp')
 		$scope.errMsg = '';
 		$scope.replace = '';
 
+		//Get all polls
 		$http.get('/api/polls').success(function (poll) {
 			$scope.allPolls = poll;
 			$scope.pollCount = poll.length;
 			socket.syncUpdates('poll', $scope.allPolls);
-
 		});
 
-		$scope.tooltip = function (val) {
+		$scope.getColor = function () {
+			for(var i = 0; i < $scope.pollOptions.length; i++) {
+				$scope.pollOptions[i].color = $scope.colors[i];
+			}
+		};
 
+		//Info tooltips
+		$scope.tooltip = function (val) {
 			$scope.tt = true;
 
 			if(val === 0) {
 				$scope.tooltipMSG = 'Makes sure only users can vote.';
-			}
-
-			if(val === 1) {
+			} else if(val === 1) {
 				$scope.tooltipMSG = 'Allows multiple votes from the same location.';
 			}
 
 		};
 
 		$scope.addPoll = function () {
-
-			console.log($scope.pollOptions[0].label);
 
 			for(var i = 0; i < $scope.allPolls.length; i++) {
 				if($scope.allPolls[i].pollTitle === $scope.pollQuestion && $scope.allPolls[i].author === (Auth.getCurrentUser().name || 'lazy')) {
@@ -106,13 +102,14 @@ angular.module('votingAppApp')
 		};
 
 		$scope.addOption = function () {
+
 			$scope.pollOptions.push({
 				'value': 0,
 				'color': '',
 				'label': '',
 				'per': 0
-
 			});
+
 		};
 
 		$scope.removeOption = function (index) {

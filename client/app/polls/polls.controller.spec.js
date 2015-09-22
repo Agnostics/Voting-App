@@ -22,8 +22,4 @@ describe('Controller: PollsCtrl', function () {
 		});
 	}));
 
-	// it('should attach a list of polls to the scope', function () {
-	// 	$httpBackend.flush();
-	// 	expect(scope.polls.length).toBe(4);
-	// });
 });
