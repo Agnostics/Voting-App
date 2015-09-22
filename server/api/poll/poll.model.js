@@ -11,8 +11,7 @@ var PollSchema = new Schema({
 	url: String,
 	per: Number,
 	voted: Array,
-	userCheck: Boolean,
-	ip: String
+	userCheck: Boolean
 });
 
 module.exports = mongoose.model('Poll', PollSchema);

@@ -12,8 +12,6 @@ angular.module('votingAppApp')
 		$scope.results = false;
 		$scope.canVote = true;
 		$scope.check = false;
-		$scope.hasName = false;
-
 		$scope.total = 0;
 		$scope.totalArr = [];
 
@@ -59,16 +57,6 @@ angular.module('votingAppApp')
 			if($routeParams.poll !== 'polls') {
 				$scope.userPoll = poll;
 				$scope.options = true;
-
-				if($scope.userIP === '' || $scope.userIP === undefined) {
-					$scope.checkVoted();
-
-					// $.getJSON('http://ipv4.myexternalip.com/json', function (data) {
-					// 	$scope.$apply(function () {
-					// 		$scope.userIP = data.ip;
-					// 	});
-					// });
-				}
 
 				$scope.textToCopy = $location.$$host + '/' + $routeParams.user + '/' + $routeParams.poll + '/';
 			}
@@ -128,33 +116,32 @@ angular.module('votingAppApp')
 			if(poll.length < 1) {
 				$scope.nothing = true;
 				$scope.options = false;
+
+			}
+
+			if($routeParams.poll !== 'polls' && $scope.userPoll[0].userCheck) {
+
+				$scope.checkVote();
 			}
 
 			socket.syncUpdates('poll', $scope.allPolls);
 
 		});
 
-		function functiontofindIndexByKeyValue(array, key, value) {
+		$scope.$on('$destroy', function () {
+			socket.unsyncUpdates('poll');
+		});
 
-			for(var i = 0; i < array.length; i++) {
-
-				if(array[i][key] === value) {
-					return i;
-				}
-			}
-			return null;
-		}
-
-		$scope.checkVoted = function () {
+		$scope.checkVote = function () {
 
 			$scope.userPoll[0].voted.forEach(function (elem) {
 
-				if(elem === $scope.userIP) {
-					$scope.copy = true;
+				if(elem === Auth.getCurrentUser().name) {
 					$scope.canVote = false;
+					$location.path('/' + $routeParams.user + '/' + $routeParams.poll + '/' + 'results');
 
 				} else {
-					$scope.copy = false;
+
 					$scope.canVote = true;
 
 				}
@@ -163,47 +150,14 @@ angular.module('votingAppApp')
 
 		};
 
-		$scope.vote = function (option) {
-
-			if($scope.userPoll[0].userCheck && Auth.getCurrentUser().name === undefined) {
-				$scope.canVote = false;
-				$location.path('/' + 'login');
-				return;
-			}
-
-			$scope.checkVoted();
-
-			if($scope.canVote) {
-
-				if(!$scope.copy) {
-					$scope.userPoll[0].voted.push($scope.userIP);
-				}
-
-				var index = functiontofindIndexByKeyValue($scope.userPoll[0].data, 'label', option);
-
-				$scope.userPoll[0].data[index].value++;
-
-				$http.put('/api/polls/' + $scope.userPoll[0]._id, $scope.userPoll[0]);
-				socket.syncUpdates('poll', $scope.userPoll);
-				$scope.canVote = false;
-
-				$location.path('/' + $routeParams.user + '/' + $routeParams.poll + '/' + 'results');
-			} else {
-
-				$timeout(function () {
-					$location.path('/' + $routeParams.user + '/' + $routeParams.poll + '/' + 'results');
-				}, 3000);
-
-			}
-
-		};
-
 		$scope.deletePoll = function (poll) {
 
 			if($routeParams.user === Auth.getCurrentUser().name) {
 
 				$http.delete('/api/polls/' + poll._id);
-			} else {}
+			} else {
+				console.log('cant');
+			}
 
 		};
 
@@ -223,14 +177,46 @@ angular.module('votingAppApp')
 
 		};
 
+		function functiontofindIndexByKeyValue(array, key, value) {
+
+			for(var i = 0; i < array.length; i++) {
+
+				if(array[i][key] === value) {
+					return i;
+				}
+			}
+			return null;
+		}
+
+		$scope.vote = function (option) {
+
+			if($scope.userPoll[0].userCheck && Auth.getCurrentUser().name === undefined) {
+				$scope.canVote = false;
+				$location.path('/' + 'login');
+			}
+
+			if($scope.canVote) {
+
+				$scope.userPoll[0].voted.push(Auth.getCurrentUser().name);
+
+				var index = functiontofindIndexByKeyValue($scope.userPoll[0].data, 'label', option);
+
+				$scope.userPoll[0].data[index].value++;
+
+				$http.put('/api/polls/' + $scope.userPoll[0]._id, $scope.userPoll[0]);
+				socket.syncUpdates('poll', $scope.userPoll);
+				$scope.canVote = false;
+
+				$location.path('/' + $routeParams.user + '/' + $routeParams.poll + '/' + 'results');
+
+			}
+
+		};
+
 		$scope.searchButton = function () {
 			$scope.searched = $scope.search;
 			$('body').removeClass('loaded');
 			$timeout(function () {}, 0);
 		};
-
-		$scope.$on('$destroy', function () {
-			socket.unsyncUpdates('poll');
-		});
 
 	});
