@@ -21,6 +21,7 @@ angular.module('votingAppApp')
 		$scope.labels = [];
 		$scope.data = [];
 		$scope.textToCopy = '';
+		$scope.userIP = '';
 
 		//Checks user polls to see if they are the owner.
 		if(Auth.getCurrentUser().name === $routeParams.user) {
@@ -51,6 +52,7 @@ angular.module('votingAppApp')
 
 			//Show user poll if not /polls
 			if($routeParams.poll !== 'polls') {
+
 				$scope.userPoll = poll;
 				$scope.showAll = false;
 				$scope.options = true;
@@ -121,8 +123,9 @@ angular.module('votingAppApp')
 
 		//Checks who voted and if your name matches, you cannot vote.
 		$scope.checkVote = function () {
+
 			$scope.userPoll[0].voted.forEach(function (elem) {
-				if(elem === Auth.getCurrentUser().name) {
+				if(elem === $scope.userIP) {
 					$scope.canVote = false;
 					$scope.votedAlready = true;
 
@@ -138,6 +141,11 @@ angular.module('votingAppApp')
 		//Handles the operation when user clicks an option.
 		$scope.vote = function (option) {
 
+			//Get user ip
+			$http.get('/ip').success(function (ip) {
+				$scope.userIP = ip;
+			});
+
 			//If 'users only' is checked and you are not logged in, redirect to login page.
 			if($scope.userPoll[0].userCheck && Auth.getCurrentUser().name === undefined) {
 				$scope.canVote = false;
@@ -147,7 +155,7 @@ angular.module('votingAppApp')
 			if($scope.canVote) {
 
 				//Push name to voted array
-				$scope.userPoll[0].voted.push(Auth.getCurrentUser().name);
+				$scope.userPoll[0].voted.push($scope.userIP);
 
 				//Find option user clicked and increases the value by 1.
 				var index = findIndexByKeyValue($scope.userPoll[0].data, 'label', option);
@@ -163,7 +171,7 @@ angular.module('votingAppApp')
 
 			} else {
 				console.log('You already voted!');
-				// TODO: Already voted!
+				$location.path('/' + $routeParams.user + '/' + $routeParams.poll + '/' + 'results');
 			}
 
 		};

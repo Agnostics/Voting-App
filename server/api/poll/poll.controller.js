@@ -45,6 +45,7 @@ exports.user = function (req, res) {
 
 // Get single user poll
 exports.userPoll = function (req, res) {
+
 	Poll.find({
 		author: req.params.user,
 		pollName: req.params.poll
