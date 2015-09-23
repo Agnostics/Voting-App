@@ -16,12 +16,12 @@ angular.module('votingAppApp')
 		$scope.total = 0;
 		$scope.totalArr = [];
 		$scope.votedAlready = false;
+		// $scope.userIP = '';
 
 		//Dougnut Chart variables
 		$scope.labels = [];
 		$scope.data = [];
 		$scope.textToCopy = '';
-		$scope.userIP = '';
 
 		//Checks user polls to see if they are the owner.
 		if(Auth.getCurrentUser().name === $routeParams.user) {
@@ -50,13 +50,13 @@ angular.module('votingAppApp')
 				$scope.options = false;
 			}
 
-			//Show user poll if not /polls
+			//Show user poll
 			if($routeParams.poll !== 'polls') {
 
 				$scope.userPoll = poll;
 				$scope.showAll = false;
 				$scope.options = true;
-				$scope.checkVote();
+				$scope.getIP();
 				$scope.textToCopy = $location.$$host + '/' + $routeParams.user + '/' + $routeParams.poll + '/';
 			}
 
@@ -125,36 +125,27 @@ angular.module('votingAppApp')
 		$scope.checkVote = function () {
 
 			$scope.userPoll[0].voted.forEach(function (elem) {
+				if(elem === $scope.userIP) {
+					$scope.canVote = false;
 
-				if($scope.userPoll[0].sameLocation) {
-					if(elem === Auth.getCurrentUser().name || Auth.getCurrentUser().name === undefined) {
-						$scope.canVote = false;
-
-					} else {
-						$scope.canVote = true;
-						$scope.votedAlready = false;
-					}
 				} else {
-					if(elem === $scope.userIP) {
-						$scope.canVote = false;
-
-					} else {
-						$scope.canVote = true;
-						$scope.votedAlready = false;
-					}
+					$scope.canVote = true;
+					$scope.votedAlready = false;
 				}
 
 			});
 
 		};
 
-		//Handles the operation when user clicks an option.
-		$scope.vote = function (option) {
-
-			//Get user ip
+		$scope.getIP = function () {
 			$http.get('/ip').success(function (ip) {
 				$scope.userIP = ip;
 			});
+		};
+
+		//Handles the operation when user clicks an option.
+		$scope.vote = function (option) {
+			$scope.checkVote();
 
 			//If 'users only' is checked and you are not logged in, redirect to login page.
 			if($scope.userPoll[0].userCheck && Auth.getCurrentUser().name === undefined) {
@@ -165,17 +156,7 @@ angular.module('votingAppApp')
 			if($scope.canVote) {
 
 				//Push name to voted array
-				if($scope.userPoll[0].sameLocation) {
-					if(Auth.getCurrentUser().name === undefined) {
-						$scope.requireLogin = true;
-						$scope.canVote = false;
-					} else {
-						$scope.userPoll[0].voted.push(Auth.getCurrentUser().name);
-					}
-
-				} else {
-					$scope.userPoll[0].voted.push($scope.userIP);
-				}
+				$scope.userPoll[0].voted.push($scope.userIP);
 
 				//Find option user clicked and increases the value by 1.
 				var index = findIndexByKeyValue($scope.userPoll[0].data, 'label', option);

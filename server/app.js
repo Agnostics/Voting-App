@@ -35,11 +35,6 @@ require('./routes')(app);
 
 app.enable('trust proxy');
 
-app.use('/ip', function (req, res) {
-	var ip = req.headers['x-forwarded-for'] || req.connection.remoteAddress;
-	res.send(ip);
-});
-
 // Start server
 server.listen(config.port, config.ip, function () {
 	console.log('Express server listening on %d, in %s mode', config.port, app.get('env'));

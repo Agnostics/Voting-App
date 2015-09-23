@@ -11,14 +11,11 @@ angular.module('votingAppApp')
 				templateUrl: 'app/main/main.html',
 				controller: 'MainCtrl'
 			})
-			.when('/:user', {
-				templateUrl: 'app/polls/polls.html',
-				controller: 'PollsCtrl'
-			})
-			.when('/admin-panel', {
-				templateUrl: 'app/admin/admin.html',
-				controller: 'AdminCtrl'
-			})
+
+		.when('/admin-panel', {
+			templateUrl: 'app/admin/admin.html',
+			controller: 'AdminCtrl'
+		})
 
 		.when('/:user/:poll', {
 				templateUrl: 'app/polls/polls.html',
