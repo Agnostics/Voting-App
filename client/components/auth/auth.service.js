@@ -59,8 +59,6 @@ angular.module('votingAppApp')
 			 * @return {Promise}
 			 */
 			createUser: function (user, callback) {
-				console.log(user);
-
 				var cb = callback || angular.noop;
 
 				return User.save(user,

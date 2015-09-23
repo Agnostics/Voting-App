@@ -13,9 +13,9 @@ angular.module('votingAppApp')
 		$scope.results = false;
 		$scope.canVote = true;
 		$scope.check = false;
-		$scope.votedAlready = false;
 		$scope.total = 0;
 		$scope.totalArr = [];
+		$scope.votedAlready = false;
 
 		//Dougnut Chart variables
 		$scope.labels = [];
@@ -125,13 +125,23 @@ angular.module('votingAppApp')
 		$scope.checkVote = function () {
 
 			$scope.userPoll[0].voted.forEach(function (elem) {
-				if(elem === $scope.userIP) {
-					$scope.canVote = false;
-					$scope.votedAlready = true;
 
+				if($scope.userPoll[0].sameLocation) {
+					if(elem === Auth.getCurrentUser().name || Auth.getCurrentUser().name === undefined) {
+						$scope.canVote = false;
+
+					} else {
+						$scope.canVote = true;
+						$scope.votedAlready = false;
+					}
 				} else {
-					$scope.canVote = true;
-					$scope.votedAlready = false;
+					if(elem === $scope.userIP) {
+						$scope.canVote = false;
+
+					} else {
+						$scope.canVote = true;
+						$scope.votedAlready = false;
+					}
 				}
 
 			});
@@ -149,13 +159,23 @@ angular.module('votingAppApp')
 			//If 'users only' is checked and you are not logged in, redirect to login page.
 			if($scope.userPoll[0].userCheck && Auth.getCurrentUser().name === undefined) {
 				$scope.canVote = false;
-				$location.path('/' + 'login');
+				$scope.requireLogin = true;
 			}
 
 			if($scope.canVote) {
 
 				//Push name to voted array
-				$scope.userPoll[0].voted.push($scope.userIP);
+				if($scope.userPoll[0].sameLocation) {
+					if(Auth.getCurrentUser().name === undefined) {
+						$scope.requireLogin = true;
+						$scope.canVote = false;
+					} else {
+						$scope.userPoll[0].voted.push(Auth.getCurrentUser().name);
+					}
+
+				} else {
+					$scope.userPoll[0].voted.push($scope.userIP);
+				}
 
 				//Find option user clicked and increases the value by 1.
 				var index = findIndexByKeyValue($scope.userPoll[0].data, 'label', option);
@@ -165,20 +185,29 @@ angular.module('votingAppApp')
 				$http.put('/api/polls/' + $scope.userPoll[0]._id, $scope.userPoll[0]);
 				socket.syncUpdates('poll', $scope.userPoll);
 				$scope.canVote = false;
+				localStorage.url = '';
 
 				//Redirects user to the results page.
 				$location.path('/' + $routeParams.user + '/' + $routeParams.poll + '/' + 'results');
 
 			} else {
-				console.log('You already voted!');
-				$location.path('/' + $routeParams.user + '/' + $routeParams.poll + '/' + 'results');
+				$scope.votedAlready = true;
+
+				if($scope.requireLogin) {
+					$scope.errMsg = ' Login is required to vote.';
+					localStorage.url = $routeParams.user + '/' + $routeParams.poll;
+
+				} else {
+					$scope.errMsg = ' You already voted...';
+
+				}
+
 			}
 
 		};
 
+		//If the user signed in is viewing their own polls, then allow delete.
 		$scope.deletePoll = function (poll) {
-
-			//If the user signed in is viewing their own polls, then allow delete.
 			if($routeParams.user === Auth.getCurrentUser().name) {
 				$http.delete('/api/polls/' + poll._id);
 			}
@@ -195,8 +224,8 @@ angular.module('votingAppApp')
 
 		};
 
-		$scope.go = function (url) {
-			$location.path(url);
+		$scope.go = function () {
+
 		};
 
 		function findIndexByKeyValue(array, key, value) {

@@ -38,6 +38,13 @@
     <div class="fa fa-check" ng-show="check"></div>
   </div>
 
+  <div class="vote-alert alert-danger ease-in" ng-click="votedAlready = false" ng-show="votedAlready" role="alert">
+    <span aria-hidden="true" class="glyphicon glyphicon-exclamation-sign"></span>&emsp;
+    <span class="sr-only">Error:</span>
+    {{errMsg}}
+    <button class="close-err" ng-click="err = false" type="button">&times;</button>
+  </div>
+
   <button class="option-button-copy" clipboard on-copied="success()" on-error="fail(err)" text="textToCopy">
     <i class="fa fa-clipboard"></i>
     &nbsp;Copy Link</button>

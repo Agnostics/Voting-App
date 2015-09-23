@@ -25,8 +25,11 @@ angular.module('votingAppApp')
 						password: $scope.user.password
 					})
 					.then(function () {
-						// Account created, redirect to home
-						$location.path('/');
+						if(localStorage.url === '' || localStorage.url === null || localStorage.url === undefined) {
+							$location.path('/');
+						} else {
+							$location.path(localStorage.url);
+						}
 					})
 					.catch(function (err) {
 						err = err.data;

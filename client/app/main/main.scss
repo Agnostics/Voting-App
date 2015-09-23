@@ -86,6 +86,10 @@
   margin          : 0 auto;
   margin-bottom: 21px;
 }
+.vote-alert {
+  @extend .alert;
+  font-size: 20px;
+}
 .hero-unit {
   position   : relative;
   padding    : 30px 15px;
