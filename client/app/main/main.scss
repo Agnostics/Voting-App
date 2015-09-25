@@ -430,8 +430,11 @@
   border-radius: 10px;
 }
 .close-btn {
-  padding-left: 15px;
-  cursor      : pointer;
+  cursor        : pointer;
+  padding-bottom: 11px;
+  border-bottom : 2px solid #59c6c6;
+  margin-top    : 4px;
+  margin-left   : -4px;
 }
 .close-btn-poll {
   @extend .close;
@@ -475,7 +478,8 @@
   text-align   : center;
   width        : 150px;
   height       : 30px;
-  margin       : 22px 10px;
+  margin       : 20px 10px;
+  margin-bottom: -5px;
   display      : inline-block;
   font-family  : 'Questrial', sans-serif;
   font-size    : 16px;
@@ -488,6 +492,11 @@
   &:focus {
     outline: none;
   }
+}
+.settings-button {
+  @extend .option-button;
+  display: block;
+  margin : 0 auto;
 }
 .poll-choice {
   background   : none;
@@ -573,8 +582,18 @@
 }
 .option-button-copy {
   @extend .option-button;
-  margin-top : 10px;
-  margin-left: 25px;
+  margin-top   : 10px;
+  margin-bottom: 25px;
+}
+.user-option {i {
+    color         : rgba(#6a6a6e,.30);
+    vertical-align: sub;
+    font-size     : 25px;
+    &:hover {
+      color : $logo-color;
+      cursor: pointer;
+    }
+  }
 }
 .progress-container {
   margin-top : 30px;
@@ -600,4 +619,19 @@
   font-family: 'Questrial', sans-serif;
   font-size  : 20px;
   text-align : center;
+}
+.fix-left {
+  margin-left: -231px !important;
+}
+.fix-right {
+  margin-left: -12px !important;
+  position   : absolute;
+}
+.checkboxes {
+  margin-left: 20px;
+}
+.recaptcha-fix {
+  margin        : 0 auto;
+  width         : 304px;
+  padding-bottom: 10px;
 }

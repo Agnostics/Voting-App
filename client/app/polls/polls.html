@@ -1,4 +1,5 @@
 <div ng-include="'components/navbar/navbar.html'"></div>
+<script async defer src="//www.google.com/recaptcha/api.js?render=explicit&onload=vcRecaptchaApiLoaded"></script>
 
 <header class="hero-unit" id="banner" ng-hide="nothing">
   <div class="container">
@@ -38,27 +39,39 @@
     <div class="fa fa-check" ng-show="check"></div>
   </div>
 
-  <div class="vote-alert alert-danger ease-in" ng-click="votedAlready = false" ng-show="votedAlready" role="alert">
+  <div class="vote-alert alert-danger ease-in" ng-click="votedAlready = false" ng-show="showError" role="alert">
     <span aria-hidden="true" class="glyphicon glyphicon-exclamation-sign"></span>&emsp;
     <span class="sr-only">Error:</span>
     {{errMsg}}
-    <button class="close-err" ng-click="err = false" type="button">&times;</button>
+    <button class="close-err" ng-click="showError = false" type="button">&times;</button>
   </div>
+
+  <div class="recaptcha-fix" key="'6Le-gQ0TAAAAAIQBMuXZZRzWBQNyiYPo3LNqvaLQ'" ng-show="forceCap" on-success="setResponse(response)" theme="light" vc-recaptcha></div>
 
   <button class="option-button-copy" clipboard on-copied="success()" on-error="fail(err)" text="textToCopy">
     <i class="fa fa-clipboard"></i>
     &nbsp;Copy Link</button>
 
+  <button class="option-button-copy" clipboard ng-click="addOptionButton()" ng-show="addOption" on-copied="success()" on-error="fail(err)" text="textToCopy">
+    Add Option
+  </button>
+
   <button class="option-button-skip" ng-click="link('results')" type="button">
     Skip Voting&nbsp;
     <i class="fa fa-arrow-right"></i>
   </button>
+
+  <div class="user-option" ng-show="editOption">
+    <input class="option-input-box ease-in" ng-model="newOptionLabel" placeholder="Enter Option">
+    <i class="fa fa-plus ease-in" ng-click="userOption()"></i>
+  </div>
+
 </div>
 
 <!-- Results Page -->
 <div class="container" ng-show="results">
 
-  <canvas chart-data="data" chart-labels="labels" chart-legend="true" chart-options="{animation: false}" class="chart chart-doughnut" getColour id="doughnut"></canvas>
+  <canvas chart-data="data" chart-labels="labels" chart-legend="true" class="chart chart-doughnut" getColour id="doughnut"></canvas>
 
   <div class="progress-container">
     <div ng-repeat="option in userPoll[0].data">

@@ -12,7 +12,9 @@ var PollSchema = new Schema({
 	per: Number,
 	voted: Array,
 	userCheck: Boolean,
-	sameLocation: Boolean
+	sameLocation: Boolean,
+	newOptions: Boolean,
+	forceCaptcha: Boolean
 
 });
 
