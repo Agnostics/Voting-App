@@ -7,6 +7,9 @@ angular.module('votingAppApp')
 		$scope.pollQuestion = '';
 		$scope.pollOptions = [];
 		$scope.userCheck = false;
+		$scope.sameLocation = false;
+		$scope.newOptions = false;
+		$scope.forceCaptcha = false;
 
 		$scope.colors = ['#97bbcd', '#dcdcdc', '#f7464a', '#46bfbd', '#fdb45c', '#949fb1', '#4d5360'];
 
@@ -31,6 +34,7 @@ angular.module('votingAppApp')
 		$scope.sameTitle = false;
 		$scope.err = false;
 		$scope.tt = false;
+		$scope.showSettings = false;
 
 		$scope.tooltipMSG = '';
 		$scope.errMsg = '';
@@ -54,9 +58,13 @@ angular.module('votingAppApp')
 			$scope.tt = true;
 
 			if(val === 0) {
-				$scope.tooltipMSG = 'Makes sure only users can vote.';
+				$scope.tooltipMSG = 'Only registered users are allowd to vote.';
 			} else if(val === 1) {
 				$scope.tooltipMSG = 'Allows multiple votes from the same location.';
+			} else if(val === 2) {
+				$scope.tooltipMSG = 'Allows a registered user to add their own option.';
+			} else if(val === 3) {
+				$scope.tooltipMSG = 'Forces a captcha to vote. Good against bots.';
 			}
 
 		};
@@ -89,7 +97,10 @@ angular.module('votingAppApp')
 				pollName: $scope.pollQuestion.replace(/[^\u4e00-\u9fa5a-zA-Z0-9]/g, '-').toString() + $scope.replace,
 				url: '/' + (Auth.getCurrentUser().name || 'lazy') + '/' + $scope.pollQuestion.replace(/[^\u4e00-\u9fa5a-zA-Z0-9]/g, '-') + $scope.replace,
 				data: $scope.pollOptions,
-				userCheck: $scope.userCheck
+				userCheck: $scope.userCheck,
+				sameLocation: $scope.sameLocation,
+				newOptions: $scope.newOptions,
+				forceCaptcha: $scope.forceCaptcha
 			});
 
 			var last = $scope.allPolls.length;

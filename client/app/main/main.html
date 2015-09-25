@@ -28,16 +28,36 @@
     </div>
 
     <div class="checkboxes">
-      <input id="a" type="checkbox"/>
-      <label class="green-background" for="a" ng-click="userCheck = !userCheck"></label>
-      <div class="box-label">Users only
-        <a ng-click="tooltip(0)">(?)</a>
+
+      <div style="display: block; padding-top:10px">
+        <input id="a" type="checkbox"/>
+        <label class="green-background" for="a" ng-click="userCheck = !userCheck"></label>
+        <div class="box-label" style="letter-spacing: 1px">Users only
+          <a ng-click="tooltip(0)">(?)</a>
+        </div>
+
+        <input id="b" type="checkbox"/>
+        <label class="green-background" for="b" ng-click="sameLocation = !sameLocation"></label>
+        <div class="box-label" data-placement="bottom" data-toggle="tooltip">Same location
+          <a class="add-click" ng-click="tooltip(1)">(?)</a>
+        </div>
       </div>
 
-      <input id="b" type="checkbox"/>
-      <label class="green-background" for="b"></label>
-      <div class="box-label" data-placement="bottom" data-toggle="tooltip">Same location
-        <a class="add-click" ng-click="tooltip(1)">(?)</a>
+      <div class="fix-left">
+        <input id="c" type="checkbox"/>
+        <label class="green-background" for="c" ng-click="newOptions = !newOptions"></label>
+        <div class="box-label" data-placement="bottom" data-toggle="tooltip">New options
+          <a class="add-click" ng-click="tooltip(2)">(?)</a>
+        </div>
+      </div>
+
+      <div class="fix-right">
+        <input id="d" type="checkbox"/>
+        <label class="green-background" for="d" ng-click="forceCaptcha = !forceCaptcha"></label>
+        <div class="box-label" data-placement="bottom" data-toggle="tooltip">Force captcha
+          <a class="add-click" ng-click="tooltip(3)">(?)</a>
+        </div>
+
       </div>
 
     </div>

@@ -24,6 +24,7 @@ module.exports = function (config) {
       'client/bower_components/angular-sanitize/angular-sanitize.js',
       'client/bower_components/angular-socket-io/socket.js',
       'client/bower_components/lodash/dist/lodash.compat.js',
+			'client/bower_components/angular-recaptcha/release/angular-recaptcha.js',
       'client/app/app.js',
       'client/app/**/*.js',
       'client/components/**/*.js',

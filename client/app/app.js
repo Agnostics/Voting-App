@@ -8,7 +8,8 @@ angular.module('votingAppApp', [
   'btford.socket-io',
   'ui.bootstrap',
   'angular-clipboard',
-  'chart.js'
+  'chart.js',
+  'vcRecaptcha'
 
 ])
 	.config(function ($routeProvider, $locationProvider, $httpProvider) {

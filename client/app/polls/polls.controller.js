@@ -13,14 +13,15 @@ angular.module('votingAppApp')
 		$scope.results = false;
 		$scope.canVote = true;
 		$scope.check = false;
-		$scope.votedAlready = false;
 		$scope.total = 0;
 		$scope.totalArr = [];
+		$scope.showError = false;
 
 		//Dougnut Chart variables
 		$scope.labels = [];
 		$scope.data = [];
 		$scope.textToCopy = '';
+		$scope.colors = ['#97bbcd', '#dcdcdc', '#f7464a', '#46bfbd', '#fdb45c', '#949fb1', '#4d5360'];
 
 		//Checks user polls to see if they are the owner.
 		if(Auth.getCurrentUser().name === $routeParams.user) {
@@ -49,12 +50,17 @@ angular.module('votingAppApp')
 				$scope.options = false;
 			}
 
-			//Show user poll if not /polls
+			//Show user poll
 			if($routeParams.poll !== 'polls') {
+
 				$scope.userPoll = poll;
 				$scope.showAll = false;
 				$scope.options = true;
-				$scope.checkVote();
+
+				$scope.addOption = $scope.userPoll[0].newOptions;
+				$scope.forceCap = $scope.userPoll[0].forceCaptcha;
+
+				$scope.getIP();
 				$scope.textToCopy = $location.$$host + '/' + $routeParams.user + '/' + $routeParams.poll + '/';
 			}
 
@@ -68,7 +74,6 @@ angular.module('votingAppApp')
 					$scope.total += elem.value;
 					$scope.labels.push(elem.label);
 					$scope.data.push(elem.value);
-
 				});
 
 				//Calculate percentages
@@ -88,14 +93,12 @@ angular.module('votingAppApp')
 						$scope.total += elem.value;
 						$scope.labelstemp.push(elem.label);
 						$scope.datatemp.push(elem.value);
-
 					});
 
 					$scope.labels = $scope.labelstemp;
 					$scope.data = $scope.datatemp;
 
 					$scope.calculatePerct();
-
 				});
 
 			} else if($routeParams.results !== '' && $routeParams.results !== 'results') {
@@ -108,7 +111,6 @@ angular.module('votingAppApp')
 				$scope.nothing = true;
 				$scope.options = false;
 			}
-
 		});
 
 		//Calculates the percentages
@@ -119,35 +121,84 @@ angular.module('votingAppApp')
 			}
 		};
 
+		$scope.setResponse = function (response) {
+			$scope.response = response;
+			$scope.forceCap = false;
+		};
+
 		//Checks who voted and if your name matches, you cannot vote.
 		$scope.checkVote = function () {
-			$scope.userPoll[0].voted.forEach(function (elem) {
-				if(elem === Auth.getCurrentUser().name) {
+
+			function alreadyVoted() {
+				if($scope.userPoll[0].sameLocation) {
+					$scope.userPoll[0].voted.forEach(function (elem) {
+						if(elem === Auth.getCurrentUser().name) {
+							$scope.canVote = false;
+						} else {
+							$scope.canVote = true;
+						}
+					});
+				} else {
+					$scope.userPoll[0].voted.forEach(function (elem) {
+						if(elem === $scope.userIP) {
+							$scope.canVote = false;
+						} else {
+							$scope.canVote = true;
+						}
+					});
+				}
+			}
+
+			if($scope.userPoll[0].sameLocation) {
+				$scope.userPoll[0].userCheck = true;
+				alreadyVoted();
+			}
+
+			if($scope.userPoll[0].forceCaptcha) {
+				if($scope.response === undefined) {
+					$scope.requireCaptcha = true;
 					$scope.canVote = false;
-					$scope.votedAlready = true;
 
 				} else {
+					$scope.requireCaptcha = false;
 					$scope.canVote = true;
-					$scope.votedAlready = false;
+					alreadyVoted();
 				}
-
-			});
+			} else {
+				alreadyVoted();
+			}
 
 		};
 
+		$scope.getIP = function () {
+			$http.get('/ip').success(function (ip) {
+				$scope.userIP = ip;
+			});
+		};
+
+		$scope.updateColor = function () {
+			for(var i = 0; i < $scope.userPoll[0].data.length; i++) {
+				$scope.userPoll[0].data[i].color = $scope.colors[i];
+			}
+		};
 		//Handles the operation when user clicks an option.
 		$scope.vote = function (option) {
+			$scope.checkVote();
 
 			//If 'users only' is checked and you are not logged in, redirect to login page.
 			if($scope.userPoll[0].userCheck && Auth.getCurrentUser().name === undefined) {
 				$scope.canVote = false;
-				$location.path('/' + 'login');
+				$scope.requireLogin = true;
 			}
 
 			if($scope.canVote) {
 
 				//Push name to voted array
-				$scope.userPoll[0].voted.push(Auth.getCurrentUser().name);
+				if($scope.userPoll[0].sameLocation) {
+					$scope.userPoll[0].voted.push(Auth.getCurrentUser().name);
+				} else {
+					$scope.userPoll[0].voted.push($scope.userIP);
+				}
 
 				//Find option user clicked and increases the value by 1.
 				var index = findIndexByKeyValue($scope.userPoll[0].data, 'label', option);
@@ -156,21 +207,60 @@ angular.module('votingAppApp')
 				//Update poll value in database and sync to all users.
 				$http.put('/api/polls/' + $scope.userPoll[0]._id, $scope.userPoll[0]);
 				socket.syncUpdates('poll', $scope.userPoll);
-				$scope.canVote = false;
+				localStorage.url = '';
 
 				//Redirects user to the results page.
 				$location.path('/' + $routeParams.user + '/' + $routeParams.poll + '/' + 'results');
 
 			} else {
-				console.log('You already voted!');
-				// TODO: Already voted!
+				$scope.showError = true;
+
+				if($scope.requireCaptcha) {
+					$scope.errMsg = 'Verify that you are human first.';
+				} else if($scope.requireLogin) {
+					$scope.errMsg = ' Login is required to vote.';
+					localStorage.url = $routeParams.user + '/' + $routeParams.poll;
+				} else {
+					$scope.errMsg = ' You already voted...';
+				}
 			}
+		};
+
+		$scope.addOptionButton = function () {
+
+			if($scope.userPoll[0].forceCaptcha) {
+				if($scope.response === undefined) {
+					$scope.editOption = false;
+					$scope.showError = true;
+					$scope.errMsg = 'Verify that you are human first.';
+				} else {
+					$scope.editOption = true;
+				}
+			} else {
+				$scope.editOption = true;
+			}
+		};
+
+		$scope.userOption = function () {
+			$scope.userPoll[0].data.push({
+				'value': 0,
+				'color': '',
+				'label': $scope.newOptionLabel,
+				'per': 0,
+			});
+
+			$scope.updateColor();
+
+			$http.put('/api/polls/' + $scope.userPoll[0]._id, $scope.userPoll[0]);
+			socket.syncUpdates('poll', $scope.userPoll);
+
+			$scope.addOption = false;
+			$scope.editOption = false;
 
 		};
 
+		//If the user signed in is viewing their own polls, then allow delete.
 		$scope.deletePoll = function (poll) {
-
-			//If the user signed in is viewing their own polls, then allow delete.
 			if($routeParams.user === Auth.getCurrentUser().name) {
 				$http.delete('/api/polls/' + poll._id);
 			}
@@ -185,10 +275,6 @@ angular.module('votingAppApp')
 				$location.path(url);
 			}
 
-		};
-
-		$scope.go = function (url) {
-			$location.path(url);
 		};
 
 		function findIndexByKeyValue(array, key, value) {
