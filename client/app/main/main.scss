@@ -1,3 +1,198 @@
+@mixin placeholder {&.placeholder {
+    @content;
+  }
+  &:-moz-placeholder {
+    @content;
+  }
+  &::-moz-placeholder {
+    @content;
+  }
+  &::-webkit-input-placeholder {
+    @content;
+  }
+}
+@media (max-width: 415px) {#banner {.home-title {
+      font-size: 34px !important;
+    }
+  }
+  main {
+    width: 320px !important;
+    left : 62%;
+    top  : 40%;
+    .input-label {
+      display: none;
+    }
+    .input-box {
+      width: 100%;
+    }
+  }
+  footer {
+    font-size: 12px;
+  }
+  .navbar-text {
+    display: none;
+  }
+  .navbar-collapse {
+    padding: 0 !important;
+  }
+  .navbar-collapse.in {
+    overflow-x: hidden;
+  }
+  .chart-container {
+    margin-top: 15px !important;
+    width     : 100% !important;
+    text-align: center;
+    float     : none !important;
+  }
+  .progress-container {
+    margin-left: 0 !important;
+    margin-top : 15px !important;
+    .progress {
+      height       : 17px !important;
+      margin-bottom: 22px !important;
+    }
+  }
+  .hero-unit {
+    padding: 10px 15px !important;
+  }
+  .fa-check {
+    display: none !important;
+  }
+  .alert {
+    width    : 300px !important;
+    font-size: 18px !important;
+  }
+  .main-input-box {@include placeholder {
+      font-size: 20px !important;
+    }
+  }
+  .option-input-box {@include placeholder {
+      font-size: 18px !important;
+    }
+  }
+  .checkboxes {
+    margin-left: -38px !important;
+    div {
+      padding  : 0 !important;
+      font-size: 16px !important;
+    }
+    .fix-left {
+      margin-left: -184px !important;
+    }
+    .fix-right {
+      margin-left: 25px !important;
+    }
+  }
+  .login-button {
+    width: 280px;
+  }
+  .option-button {
+    margin   : 5px 21px !important;
+    width    : 125px !important;
+    font-size: 16px !important;
+  }
+  .option-input-box {
+    width: 246px !important;
+  }
+  .site-button {
+    width: 250px !important;
+  }
+  .nav {li {
+      padding-left: 4px;
+    }
+  }
+}
+@media (max-width: 375px) {#banner {.home-title {
+      font-size: 34px !important;
+    }
+  }
+  main {
+    width: 320px !important;
+    left : 62%;
+    top  : 46%;
+    .input-label {
+      display: none;
+    }
+    .input-box {
+      width: 100%;
+    }
+  }
+  footer {
+    font-size: 12px;
+  }
+  .navbar-text {
+    display: none;
+  }
+  .navbar-collapse {
+    padding: 0 !important;
+  }
+  .navbar-collapse.in {
+    overflow-x: hidden;
+  }
+  .chart-container {
+    margin-top: 15px !important;
+    width     : 100% !important;
+    text-align: center;
+    float     : none !important;
+  }
+  .progress-container {
+    margin-left: 0 !important;
+    margin-top : 15px !important;
+    .progress {
+      height       : 17px !important;
+      margin-bottom: 17px !important;
+    }
+  }
+  .hero-unit {
+    padding: 10px 15px !important;
+  }
+  .fa-check {
+    display: none !important;
+  }
+  .alert {
+    width    : 300px !important;
+    font-size: 18px !important;
+  }
+  .main-input-box {@include placeholder {
+      font-size: 20px !important;
+    }
+  }
+  .option-input-box {@include placeholder {
+      font-size: 18px !important;
+    }
+  }
+  .checkboxes {
+    margin-left: -38px !important;
+    div {
+      padding  : 0 !important;
+      font-size: 16px !important;
+    }
+    .fix-left {
+      margin-left: -184px !important;
+    }
+    .fix-right {
+      margin-left: 25px !important;
+    }
+  }
+  .login-button {
+    width: 280px;
+  }
+  .option-button {
+    margin   : 5px 21px !important;
+    width    : 125px !important;
+    font-size: 16px !important;
+  }
+  .option-input-box {
+    width: 246px !important;
+  }
+  .site-button {
+    width: 250px !important;
+  }
+  .nav {li {
+      padding-left: 4px;
+    }
+  }
+}
 @media (max-width: 360px) {main {
     width: 360px !important;
     left : 55%;
@@ -18,12 +213,25 @@
   .site-button {
     width: 300px !important;
   }
+  .navbar-text {
+    display: none;
+  }
+  .navbar-collapse {
+    padding: 0 !important;
+  }
+  .navbar-collapse.in {
+    overflow-x: hidden;
+  }
   .nav {li {
-      padding-left: 36px;
+      padding-left: 4px;
     }
   }
 }
-@media (max-width: 320px) {main {
+@media (max-width: 320px) {#banner {.home-title {
+      font-size: 34px !important;
+    }
+  }
+  main {
     width: 320px !important;
     left : 62%;
     top  : 46%;
@@ -33,12 +241,65 @@
     .input-box {
       width: 100%;
     }
+    .logo {
+      margin-top: 36px;
+    }
+  }
+  footer {
+    font-size: 12px;
+  }
+  .chart-container {
+    margin-top: 15px !important;
+    width     : 100% !important;
+    text-align: center;
+    float     : none !important;
+  }
+  .progress-container {
+    margin-left: 0 !important;
+    margin-top : 15px !important;
+    .progress {
+      height       : 17px !important;
+      margin-bottom: 10px !important;
+    }
+  }
+  .hero-unit {
+    padding: 0 15px !important;
+  }
+  .fa-check {
+    display: none !important;
+  }
+  .alert {
+    width    : 300px !important;
+    font-size: 18px !important;
+  }
+  .main-input-box {@include placeholder {
+      font-size: 20px !important;
+    }
+  }
+  .option-input-box {@include placeholder {
+      font-size: 18px !important;
+    }
+  }
+  .checkboxes {
+    margin-left: -38px !important;
+    div {
+      padding  : 0 !important;
+      font-size: 16px !important;
+    }
+    .fix-left {
+      margin-left: -184px !important;
+    }
+    .fix-right {
+      margin-left: 25px !important;
+    }
   }
   .login-button {
-    width: 320px;
+    width: 280px;
   }
   .option-button {
-    margin: 15px 5px !important;
+    margin   : 5px 21px !important;
+    width    : 100px !important;
+    font-size: 13px !important;
   }
   .option-input-box {
     width: 246px !important;
@@ -175,31 +436,12 @@
     }
   }
 }
-.main-input-box::-webkit-input-placeholder {
-  color         : white;
-  text-align    : center;
-  font-size     : 30px;
-  letter-spacing: 10px;
-}
-.main-input-box:-moz-placeholder {
-  /* Firefox 18- */
-  color         : white;
-  text-align    : center;
-  font-size     : 30px;
-  letter-spacing: 10px;
-}
-.main-input-box::-moz-placeholder {
-  /* Firefox 19+ */
-  color         : white;
-  text-align    : center;
-  font-size     : 30px;
-  letter-spacing: 10px;
-}
-.main-input-box:-ms-input-placeholder {
-  color         : white;
-  text-align    : center;
-  font-size     : 30px;
-  letter-spacing: 10px;
+.main-input-box {@include placeholder {
+    color         : white;
+    text-align    : center;
+    font-size     : 30px;
+    letter-spacing: 10px;
+  }
 }
 @mixin keyframes($name) {@-webkit-keyframes #{$name} {
     @content
@@ -224,8 +466,6 @@
   -o-animation     : $value;
   animation        : $value;
 }
-
-/* ========= */
 .checkboxes {a {
     cursor         : pointer;
     text-decoration: none;
@@ -309,32 +549,40 @@
 }
 
 //
-.option-input-box::-webkit-input-placeholder {
-  color         : $dark-gray;
-  text-align    : center;
-  font-size     : 24px;
-  letter-spacing: 10px;
+.option-input-box {@include placeholder {
+    color         : $dark-gray;
+    text-align    : center;
+    font-size     : 24px;
+    letter-spacing: 10px;
+  }
 }
-.option-input-box:-moz-placeholder {
-  /* Firefox 18- */
-  color         : $dark-gray;
-  text-align    : center;
-  font-size     : 24px;
-  letter-spacing: 10px;
-}
-.option-input-box::-moz-placeholder {
-  /* Firefox 19+ */
-  color         : $dark-gray;
-  text-align    : center;
-  font-size     : 24px;
-  letter-spacing: 10px;
-}
-.option-input-box:-ms-input-placeholder {
-  color         : $dark-gray;
-  text-align    : center;
-  font-size     : 24px;
-  letter-spacing: 10px;
-}
+
+// .option-input-box::-webkit-input-placeholder {
+//   color         : $dark-gray;
+//   text-align    : center;
+//   font-size     : 24px;
+//   letter-spacing: 10px;
+// }
+// .option-input-box:-moz-placeholder {
+//   /* Firefox 18- */
+//   color         : $dark-gray;
+//   text-align    : center;
+//   font-size     : 24px;
+//   letter-spacing: 10px;
+// }
+// .option-input-box::-moz-placeholder {
+//   /* Firefox 19+ */
+//   color         : $dark-gray;
+//   text-align    : center;
+//   font-size     : 24px;
+//   letter-spacing: 10px;
+// }
+// .option-input-box:-ms-input-placeholder {
+//   color         : $dark-gray;
+//   text-align    : center;
+//   font-size     : 24px;
+//   letter-spacing: 10px;
+// }
 .main-input-box {
   background    : transparent;
   border        : none;

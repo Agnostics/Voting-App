@@ -36,7 +36,7 @@ angular.module('votingAppApp')
 
 		//Checks if user is not registered.
 		if($routeParams.user === 'lazy') {
-			$scope.pageOwner = 'Temparay ';
+			$scope.pageOwner = 'Temporary ';
 			$scope.currentPage = 'unregistered users';
 		}
 
